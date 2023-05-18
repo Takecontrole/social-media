@@ -1,6 +1,5 @@
 {
   "name": "client-2",
-  "proxy": "https://social-media-api.adaptable.app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
