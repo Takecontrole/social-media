@@ -1,15 +1,15 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { GLOBALTYPES } from '../redux/actions/globalTypes'
-import { createPost, updatePost } from '../redux/actions/postAction'
+import { createVideo, updateVideo } from '../redux/actions/videoAction'
 import Icons from './Icons'
 import {Box, Button, Divider, useTheme} from "@mui/material"
 import { imageShow, videoShow } from '../utils/mediaShow'
 import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
 import MusicNoteOutlinedIcon from '@mui/icons-material/MusicNoteOutlined';
 import PlayCircleOutlinedIcon from '@mui/icons-material/PlayCircleOutlined';
-const StatusModal = () => {
-    const { auth, theme, status, socket } = useSelector(state => state)
+const VideoStatusModal = () => {
+    const { auth, theme, videostatus, socket } = useSelector(state => state)
     const dispatch = useDispatch()
 
     const [content, setContent] = useState('')
@@ -25,7 +25,7 @@ const StatusModal = () => {
   useEffect(() => {
     let handler = (e)=>{
       if(!menuRef.current.contains(e.target)){
-        dispatch({ type: GLOBALTYPES.STATUS, payload: false})
+        dispatch({ type: GLOBALTYPES.VIDEOSTATUS, payload: false})
         console.log(menuRef.current);
       }      
     };
@@ -47,8 +47,8 @@ const StatusModal = () => {
         files.forEach(file => {
             if(!file) return err = "Не существует."
 
-            if(file.size > 1024 * 1024 * 5){
-                return err = "Фото должно быть меньше 5мб."
+            if(file.size > 1024 * 1024 * 10){
+                return err = "Слишком большой размер."
             }
 
             return newImages.push(file)
@@ -100,13 +100,13 @@ const StatusModal = () => {
         e.preventDefault()
         if(images.length === 0)
         return dispatch({ 
-            type: GLOBALTYPES.ALERT, payload: {error: "Добавьте фото."}
+            type: GLOBALTYPES.ALERT, payload: {error: "Добавьте видео."}
         })
 
-        if(status.onEdit){
-            dispatch(updatePost({content, images, auth, status}))
+        if(videostatus.onEdit){
+            dispatch(updateVideo({content, images, auth, videostatus}))
         }else{
-            dispatch(createPost({content, images, auth, socket}))
+            dispatch(createVideo({content, images, auth, socket}))
             //.then(response => {window.location.reload(false)})
         }
         
@@ -114,17 +114,18 @@ const StatusModal = () => {
         setContent('')
         setImages([])
         if(tracks) tracks.stop()
-        dispatch({ type: GLOBALTYPES.STATUS, payload: false})
+        dispatch({ type: GLOBALTYPES.VIDEOSTATUS, payload: false})
     }
 
     useEffect(() => {
-        if(status.onEdit){
-            setContent(status.content)
-            setImages(status.images)
-        }
-    },[status])
+        if(videostatus.onEdit){
+            setContent(videostatus.content)
+            setImages(videostatus.images)
+        } 
+        
+    },[videostatus])
 
-
+    
    
 
     return (
@@ -134,7 +135,7 @@ const StatusModal = () => {
 
                 <div className="status_body">
                     <textarea name="content" value={content}
-                    placeholder={`${auth.user.username}, введите текст записи...`}
+                    placeholder={`${auth.user.username}, введите название видео...`}
                     onChange={e => setContent(e.target.value)}
                     style={{
                         filter: theme ? 'invert(1)' : 'invert(0)',
@@ -189,11 +190,6 @@ const StatusModal = () => {
                     color={palette.primary.main}
                     >
                     <div className="input_images" style={{alignItems:"center",justifyContent:"start"}}>
-                        {
-                            stream 
-                            ? <i className="fas fa-camera" onClick={handleCapture} />
-                            : <>
-                                <PlayCircleOutlinedIcon onClick={handleStream} />
 
                                 <div className="file_upload">
                                 <CameraAltOutlinedIcon
@@ -201,13 +197,10 @@ const StatusModal = () => {
                       <input type="file" name="file" id="file"
                                     multiple accept="image/*,video/*" onChange={handleChangeImages} />
                                 </div>
-                        <MusicNoteOutlinedIcon
-                  /> 
-                        <Box >
-                        <Icons setContent={setContent} content={content} theme={theme} />
-                    </Box>
-                            </>
-                        }
+
+
+                            
+                        
                     </div>
                 <div className="status_footer">
                     <Button sx={{ 
@@ -220,8 +213,8 @@ const StatusModal = () => {
                 color: palette.background.alt,
                 "&:hover": { color: palette.primary.main },
                                 "&:focus": { outline: "none !important"}
-              }} type="submit">
-                        Опубликовать
+              }} type="submit" >
+                        Опубликовать видео
                     </Button>
                 </div>
                 </Box>
@@ -234,4 +227,4 @@ const StatusModal = () => {
     )
 }
 
-export default StatusModal
+export default VideoStatusModal

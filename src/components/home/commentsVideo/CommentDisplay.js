@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import CommentCard from './CommentCard'
 
-const CommentDisplay = ({comment, post, replyCm}) => {
+const CommentDisplay = ({comment, video, replyCm}) => {
     const [showRep, setShowRep] = useState([])
     const [next, setNext] = useState(1)
 
@@ -11,7 +11,7 @@ const CommentDisplay = ({comment, post, replyCm}) => {
 
     return (
         <div className="comment_display">
-            <CommentCard comment={comment} post={post} commentId={comment._id} >
+            <CommentCard comment={comment} video={video} commentId={comment._id} >
                 <div className="pl-4">
                     {
                         showRep.map((item, index) => (
@@ -19,7 +19,7 @@ const CommentDisplay = ({comment, post, replyCm}) => {
                             <CommentCard
                             key={index}
                             comment={item}
-                            post={post}
+                            video={video}
                             commentId={comment._id}
                              />
                         ))
@@ -29,13 +29,13 @@ const CommentDisplay = ({comment, post, replyCm}) => {
                         replyCm.length - next > 0
                         ? <div style={{cursor: 'pointer', color: 'crimson'}}
                         onClick={() => setNext(next + 10)}>
-                            развернуть...
+                            See more comments...
                         </div>
 
                         : replyCm.length > 1 &&
                         <div style={{cursor: 'pointer', color: 'crimson'}}
                         onClick={() => setNext(1)}>
-                            Спрятать комментарии...
+                            Hide comments...
                         </div>
                     }
                 </div>

@@ -4,61 +4,63 @@ import { Link, useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
 import { GLOBALTYPES } from '../../../redux/actions/globalTypes'
-import { deletePost } from '../../../redux/actions/postAction'
+import { deleteVideo } from '../../../redux/actions/videoAction'
 import { BASE_URL } from '../../../utils/config'
 
-const CardHeader = ({post}) => {
+const VideoCardHeader = ({video}) => {
     const { auth, socket } = useSelector(state => state)
     const dispatch = useDispatch()
 
     const history = useHistory()
 
-    const handleEditPost = () => {
-        dispatch({ type: GLOBALTYPES.STATUS, payload: {...post, onEdit: true}})
+    const handleEditVideo = () => {
+        dispatch({ type: GLOBALTYPES.VIDEOSTATUS, payload: {...video, onEdit: true}})
     }
 
-    const handleDeletePost = () => {
-        if(window.confirm("Are you sure want to delete this post?")){
-            dispatch(deletePost({post, auth, socket}))
+    const handleDeleteVideo = () => {
+        if(window.confirm("Удаляем?")){
+            dispatch(deleteVideo({video, auth, socket}))
             return history.push("/")
         }
     }
 
     const handleCopyLink = () => {
-        navigator.clipboard.writeText(`${BASE_URL}/post/${post._id}`)
+        navigator.clipboard.writeText(`${BASE_URL}/video/${video._id}`)
     }
 
     return (
         <div className="card_header">
             <div className="d-flex">
-                <Avatar src={post.user.avatar} size="big-avatar" />
+               
+               <Avatar src={video.user.avatar} size="big-avatar" /> 
+               
 
                 <div className="card_name">
                     <h6 className="m-0">
-                        <Link to={`/profile/${post.user._id}`} className="text-dark">
-                            {post.user.username}
+                        <Link to={`/profile/${video.user._id}`} className="text-dark">
+                            {video.user.username}
                         </Link>
                     </h6>
                     <small className="text-muted">
-                        {moment(post.createdAt).fromNow()}
+                        {moment(video.createdAt).fromNow()}
                     </small>
                 </div>
             </div>
 
-            <div className="nav-item dropdown" >
+            <div className="nav-item dropdown">
                 <span className="material-icons" id="moreLink" data-toggle="dropdown">
                     more_horiz
                 </span>
 
                 <div className="dropdown-menu" style={{minWidth:"250px"}}>
                     {
-                        auth.user._id === post.user._id &&
+                        auth.user._id === video.user._id &&
                         <>
-                            <div className="dropdown-item" onClick={handleEditPost}>
-                                <span className="material-icons">create</span> Редактировать
+                            <div className="dropdown-item" onClick={handleEditVideo}>
+                                <span className="material-icons">create</span> Редактировать ссылку
                             </div>
-                            <div className="dropdown-item" onClick={handleDeletePost} >
-                                <span className="material-icons">delete_outline</span> Удалить пост
+                            <div className="dropdown-item" onClick={handleDeleteVideo} >
+                                <span className="material-icons">delete_outline</span>  Удалить
                             </div>
                         </>
                     }
@@ -72,4 +74,4 @@ const CardHeader = ({post}) => {
     )
 }
 
-export default CardHeader
+export default VideoCardHeader

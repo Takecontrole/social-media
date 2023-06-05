@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getDiscoverPosts, DISCOVER_TYPES } from '../redux/actions/discoverAction'
 import LoadIcon from '../images/loading.gif'
-import PostThumb from '../components/PostThumb'
+import DiscoverThumb from '../components/DiscoverThumb'
 import LoadMoreBtn from '../components/LoadMoreBtn'
 import { getDataAPI} from '../utils/fetchData'
 
@@ -29,12 +29,14 @@ const Discover = () => {
         <div>
             {
                 discover.loading 
-                ? <img src={LoadIcon} alt="loading" className="d-block mx-auto my-4" />
-                : <PostThumb posts={discover.posts} result={discover.result} />
+                ? <img style={{width: "100px",
+    height:"100px"}} src={LoadIcon} alt="loading" className="d-block mx-auto my-4" />
+                : <DiscoverThumb posts={discover.posts} result={discover.result} />
             }
 
             {
-                load && <img src={LoadIcon} alt="loading" className="d-block mx-auto" />
+                load && <img style={{width: "100px",
+    height:"100px"}} src={LoadIcon} alt="loading" className="d-block mx-auto" />
             }
 
             {

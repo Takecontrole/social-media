@@ -3,7 +3,7 @@
     align-items: center;
 }
 .comment_input input{
-    background: #f7f7f7;
+    
     border: none;
     outline: none;
     flex: 1;
@@ -12,8 +12,8 @@
 .comment_input .postBtn{
     border: none;
     outline: none;
-    background: #f7f7f7;
-    color: blue;
+    background: transparent;
+    color: gray;
     font-weight: 600;
 }
 .comment_input .dropdown-menu{
@@ -25,7 +25,7 @@
     padding: 10px 25px;
 }
 .comment_card .comment_content{
-    background: #eee;
+     
     padding: 7px;
     border-radius: 10px;
     border-top-left-radius: 0;

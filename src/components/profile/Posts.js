@@ -45,7 +45,8 @@ const Posts = ({auth, id, dispatch, profile}) => {
             
 
             {
-                load && <img src={LoadIcon} alt="loading" className="d-block mx-auto" />
+                load && <img style={{width: "100px",
+    height:"100px"}} src={LoadIcon} alt="loading" className="d-block mx-auto" />
             }
 
             

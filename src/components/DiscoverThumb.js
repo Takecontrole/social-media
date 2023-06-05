@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import CardHeader from './home/post_card/CardHeader'
 
-const PostThumb = ({posts, result}) => {
+const DiscoverThumb = ({posts, result}) => {
     const { theme } = useSelector(state => state) 
     const [readMore, setReadMore] = useState(false)
 
@@ -12,12 +12,13 @@ const PostThumb = ({posts, result}) => {
     return (
         <div >
             {
-                posts.map(post => (                    <div className="card border-0 my-3">                           <CardHeader post={post} /> 
+                posts.map(post => (                    <div className="card my-3">   
                            <div className="card_body-content" 
             style={{
                 filter: theme ? 'invert(1)' : 'invert(0)',
                 color: theme ? 'white' : '#111',
             }}>
+                <div style={{margin:"1rem" }}>
                 <span>
                     {
                         post.content.length < 60 
@@ -25,6 +26,8 @@ const PostThumb = ({posts, result}) => {
                         : readMore ? post.content + ' ' : post.content.slice(0, 60) + '.....'
                     }
                 </span>
+                </div>
+                
                 {
                     post.content.length > 60 &&
                     <span className="readMore" onClick={() => setReadMore(!readMore)}>
@@ -59,4 +62,4 @@ const PostThumb = ({posts, result}) => {
     )
 }
 
-export default PostThumb
+export default DiscoverThumb

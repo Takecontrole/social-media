@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from 'react-redux'
 import {
   Box,
   Divider,
@@ -35,9 +36,24 @@ import { useEffect, useState } from "react";
 import {Link, useLocation, useHistory } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
 import AvatarDropdown from "./AvatarDropdown";
+import Person2TwoToneIcon from '@mui/icons-material/Person2TwoTone';
+import SearchIcon from '@mui/icons-material/Search';
+import BookmarksIcon from '@mui/icons-material/Bookmarks';
 
-
-const navItems = [
+const Sidebar = ({ isSidebarOpen, setIsSidebarOpen, drawerWidth}) => {
+  const isNonMobile = useMediaQuery("(min-width: 801px)");
+  const { auth } = useSelector(state => state)
+  const { pathname } = useLocation();
+  const [active, setActive] = useState("");
+  const history = useHistory();
+  const theme = useTheme();
+  
+  const navItems = [
+  {
+    text: "Профиль",
+    path: `/profile/${auth.user._id}`,
+    icon: <Person2TwoToneIcon />,
+  },
   {
     text: "Новости",
     path: "/",
@@ -49,20 +65,22 @@ const navItems = [
     icon: <MailIcon />,
   },
   {
+    text: "Поиск",
+    path: '/search',
+    icon: <SearchIcon />,
+  },
+  {
     text: "Обзор",
     path: '/discover',
     icon: <PublicOutlined />,
   },
+  {
+    text: "Закладки",
+    path: '/favorite',
+    icon: <BookmarksIcon />,
+  },
 
 ];
-
-const Sidebar = ({ isSidebarOpen, setIsSidebarOpen, drawerWidth}) => {
-  const isNonMobile = useMediaQuery("(min-width: 801px)");
-  
-  const { pathname } = useLocation();
-  const [active, setActive] = useState("");
-  const history = useHistory();
-  const theme = useTheme();
 
   useEffect(() => {
     setActive(pathname.substring(1));

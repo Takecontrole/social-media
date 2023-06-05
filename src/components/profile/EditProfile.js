@@ -66,18 +66,18 @@ const EditProfile = ({setOnEdit}) => {
                     alt="avatar" style={{filter: theme ? 'invert(1)' : 'invert(0)'}} />
                     <span>
                         <i className="fas fa-camera" />
-                        <p>Change</p>
+                        <p>Поменять</p>
                         <input type="file" name="file" id="file_up"
                         accept="image/*" onChange={changeAvatar} />
                     </span>
                 </div>
                 
-                <div className="info_avatar">
+                <div className="info_bg">
                     <img src={bg ? URL.createObjectURL(bg) : auth.user.bg} 
                     alt="avatar" style={{filter: theme ? 'invert(1)' : 'invert(0)'}} />
                     <span>
                         <i className="fas fa-camera" />
-                        <p>Change</p>
+                        <p>Поменять</p>
                         <input type="file" name="file" id="file_up"
                         accept="image/*" onChange={changeBg} />
                     </span>

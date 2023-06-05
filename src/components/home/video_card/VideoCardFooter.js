@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom'
 import Send from '../../../images/send.svg'
 import LikeButton from '../../LikeButton'
 import { useSelector, useDispatch } from 'react-redux'
-import { likePost, unLikePost, savePost, unSavePost } from '../../../redux/actions/postAction'
+import { likeVideo, unLikeVideo, saveVideo , unSaveVideo} from '../../../redux/actions/videoAction'
 import ShareModal from '../../ShareModal'
 import { BASE_URL } from '../../../utils/config'
 
 
-const CardFooter = ({post}) => {
+const VideoCardFooter = ({video}) => {
     const [isLike, setIsLike] = useState(false)
     const [loadLike, setLoadLike] = useState(false)
 
@@ -22,18 +22,18 @@ const CardFooter = ({post}) => {
 
     // Likes
     useEffect(() => {
-        if(post.likes.find(like => like._id === auth.user._id)){
+        if(video.likes.find(like => like._id === auth.user._id)){
             setIsLike(true)
         }else{
             setIsLike(false)
         }
-    }, [post.likes, auth.user._id])
+    }, [video.likes, auth.user._id])
 
     const handleLike = async () => {
         if(loadLike) return;
         
         setLoadLike(true)
-        await dispatch(likePost({post, auth, socket}))
+        await dispatch(likeVideo({video, auth, socket}))
         setLoadLike(false)
     }
 
@@ -41,25 +41,25 @@ const CardFooter = ({post}) => {
         if(loadLike) return;
 
         setLoadLike(true)
-        await dispatch(unLikePost({post, auth, socket}))
+        await dispatch(unLikeVideo({video, auth}))
         setLoadLike(false)
     }
 
 
-    // Saved
+   // Saved
     useEffect(() => {
-        if(auth.user.saved.find(id => id === post._id)){
+        if(auth.user.savedVideo.find(id => id === video._id)){
             setSaved(true)
         }else{
             setSaved(false)
         }
-    },[auth.user.saved, post._id])
+    },[auth.user.savedVideo, video._id])
 
     const handleSavePost = async () => {
         if(saveLoad) return;
         
         setSaveLoad(true)
-        await dispatch(savePost({post, auth}))
+        await dispatch(saveVideo({video, auth}))
         setSaveLoad(false)
     }
 
@@ -67,7 +67,7 @@ const CardFooter = ({post}) => {
         if(saveLoad) return;
 
         setSaveLoad(true)
-        await dispatch(unSavePost({post, auth}))
+        await dispatch(unSaveVideo({video, auth}))
         setSaveLoad(false)
     }
 
@@ -80,8 +80,7 @@ const CardFooter = ({post}) => {
                     handleLike={handleLike}
                     handleUnLike={handleUnLike}
                     />
-
-                    <Link to={`/post/${post._id}`} className="text-dark">
+                    <Link to={`/video/${video._id}`} className="text-dark">
                         <i className="far fa-comment" />
                     </Link>
 
@@ -101,19 +100,19 @@ const CardFooter = ({post}) => {
 
             <div className="d-flex justify-content-between">
                 <h6 style={{padding: '0 25px', cursor: 'pointer'}}>
-                    {post.likes.length} лайки
+                    {video.likes.length} лайков
                 </h6>
                 
                 <h6 style={{padding: '0 25px', cursor: 'pointer'}}>
-                    {post.comments.length} комментарии
+                    {video.comments.length} коментариев
                 </h6>
             </div>
 
             {
-                isShare && <ShareModal url={`${BASE_URL}/post/${post._id}`} theme={theme} />
+                isShare && <ShareModal url={`${BASE_URL}/video/${video._id}`} theme={theme} />
             }
         </div>
     )
 }
 
-export default CardFooter
+export default VideoCardFooter

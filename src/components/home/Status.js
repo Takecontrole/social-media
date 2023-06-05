@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Avatar from '../Avatar'
-import StatusModul from '../Avatar'
 import { useSelector, useDispatch } from 'react-redux'
 import { GLOBALTYPES } from '../../redux/actions/globalTypes'
 import {Box, Button, Typography, InputBase, useTheme} from "@mui/material"

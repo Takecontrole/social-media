@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { Box, useMediaQuery } from "@mui/material";
 
-import LoadIcon from '../images/loading.gif'
 import AdvancedSearch from "../components/advancedSearch/AdvancedSearch"
 
 

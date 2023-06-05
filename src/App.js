@@ -7,16 +7,17 @@ import PrivateRouter from './customRouter/PrivateRouter'
 import Home from './pages/home'
 import Login from './pages/login'
 import Register from './pages/register'
-import Search from './pages/search'
 
 import Alert from './components/alert/Alert'
 import LayOut from './pages/LayOut'
 import Header from './components/header/Header'
 import StatusModal from './components/StatusModal'
+import VideoStatusModal from './components/VideoStatusModul'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { refreshToken } from './redux/actions/authAction'
 import { getPosts } from './redux/actions/postAction'
+import { getVideos } from './redux/actions/videoAction'
 import { getSuggestions } from './redux/actions/suggestionsAction'
 
 import io from 'socket.io-client'
@@ -31,7 +32,7 @@ import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { themeSettings } from "./theme";
 function App() {
-  const { auth, status, modal, call } = useSelector(state => state)
+  const { auth, status, videostatus, modal, call } = useSelector(state => state)
   const dispatch = useDispatch()
   const mode = useSelector((state) => state.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
@@ -46,6 +47,7 @@ function App() {
   useEffect(() => {
     if(auth.token) {
       dispatch(getPosts(auth.token))
+      dispatch(getVideos(auth.token))
       dispatch(getSuggestions(auth.token))
       dispatch(getNotifies(auth.token))
     }
@@ -54,7 +56,7 @@ function App() {
   
   useEffect(() => {
     if (!("Notification" in window)) {
-      alert("This browser does not support desktop notification");
+      alert("Ваш браузер не поддерживает уведомления.");
     }
     else if (Notification.permission === "granted") {}
     else if (Notification.permission !== "denied") {
@@ -81,10 +83,11 @@ function App() {
       <Alert />
 
       <input type="checkbox" id="theme" />
-      <div className={`App ${(status || modal) && 'mode'}`}> 
+      <div className={`App ${(status || videostatus || modal) && 'mode'}`}> 
       {auth.token && <LayOut />} 
         <Box sx={{ml: { xs: 0,  md:"22%", lg:"17%", xl:"14%" }}}>
           {status && <StatusModal />}
+          {videostatus && <VideoStatusModal />}
           {auth.token && <SocketClient />}
           {call && <CallModal />}
           
@@ -94,7 +97,7 @@ function App() {
 
           <PrivateRouter exact path="/:page" component={PageRender} />
           <PrivateRouter exact path="/:page/:id" component={PageRender} />
-          
+
         </Box>
       </div>
     </Router>

@@ -11,6 +11,7 @@ export const PROFILE_TYPES = {
     UNFOLLOW: 'UNFOLLOW',
     GET_ID: 'GET_PROFILE_ID',
     GET_POSTS: 'GET_PROFILE_POSTS',
+    GET_VIDEOS: 'GET_PROFILE_VIDEOS',
     UPDATE_POST: 'UPDATE_PROFILE_POST'
 }
 
@@ -22,9 +23,11 @@ export const getProfileUsers = ({id, auth}) => async (dispatch) => {
         dispatch({type: PROFILE_TYPES.LOADING, payload: true})
         const res = getDataAPI(`/user/${id}`, auth.token)
         const res1 = getDataAPI(`/user_posts/${id}`, auth.token)
+        const res2 = getDataAPI(`/user_videos/${id}`, auth.token)
         
         const users = await res;
         const posts = await res1;
+        const videos = await res2;
 
         dispatch({
             type: PROFILE_TYPES.GET_USER,
@@ -34,6 +37,10 @@ export const getProfileUsers = ({id, auth}) => async (dispatch) => {
         dispatch({
             type: PROFILE_TYPES.GET_POSTS,
             payload: {...posts.data, _id: id, page: 2}
+        })
+        dispatch({
+            type: PROFILE_TYPES.GET_VIDEOS,
+            payload: {...videos.data, _id: id, page: 2}
         })
 
         dispatch({type: PROFILE_TYPES.LOADING, payload: false})
@@ -55,7 +62,7 @@ export const updateProfileUser = ({userData, avatar, bg, auth}) => async (dispat
     return dispatch({type: GLOBALTYPES.ALERT, payload: {error: "Слишком длинное имя."}})
 
     if(userData.story.length > 200)
-    return dispatch({type: GLOBALTYPES.ALERT, payload: {error: "Ваша история слишком длинная."}})
+    return dispatch({type: GLOBALTYPES.ALERT, payload: {error: "Ваша история слишком длинна."}})
 
     try {
         let media;

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { createComment } from '../../redux/actions/commentAction'
+import { createComment } from '../../redux/actions/commentVideoAction'
 import Icons from '../Icons'
 import SendIcon from '@mui/icons-material/Send';
-const InputComment = ({children, post, onReply, setOnReply}) => {
+const InputVideoComment = ({children, video, onReply, setOnReply}) => {
     const [content, setContent] = useState('')
 
     const { auth, socket, theme } = useSelector(state => state)
@@ -27,29 +27,25 @@ const InputComment = ({children, post, onReply, setOnReply}) => {
             tag: onReply && onReply.user
         }
         
-        dispatch(createComment({post, newComment, auth, socket}))
+        dispatch(createComment({video, newComment, auth, socket}))
 
         if(setOnReply) return setOnReply(false);
     }
 
     return (
-        <form className="card-footer comment_input" style={{background:"transparent"}} onSubmit={handleSubmit}  >
+        <form className="card-footer comment_input" style={{backgroundColor:"transparent"}} onSubmit={handleSubmit} >
             {children}
-            <input type="text" placeholder="Комментарий..."
+            <input type="text" placeholder="Комментарий..." style={{backgroundColor:"transparent"}} 
             value={content} onChange={e => setContent(e.target.value)}
-            style={{
-                filter: theme ? 'invert(1)' : 'invert(0)',
-                color: theme ? 'white' : '#111',
-                background: theme ? 'rgba(0,0,0,.03)' : '',
-            }} />
+             />
 
             <Icons setContent={setContent} content={content} theme={theme} />
 
             <button type="submit" className="postBtn">
-                <SendIcon/>
+                  <SendIcon/>
             </button>
         </form>
     )
 }
 
-export default InputComment
+export default InputVideoComment

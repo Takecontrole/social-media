@@ -6,10 +6,10 @@ import moment from 'moment'
 import LikeButton from '../../LikeButton'
 import { useSelector, useDispatch } from 'react-redux'
 import CommentMenu from './CommentMenu'
-import { updateComment, likeComment, unLikeComment } from '../../../redux/actions/commentAction'
-import InputComment from '../InputComment'
+import { updateComment, likeComment, unLikeComment } from '../../../redux/actions/commentVideoAction'
+import InputVideoComment from '../InputVideoComment'
 
-const CommentCard = ({children, comment, post, commentId}) => {
+const CommentCard = ({children, comment, video, commentId}) => {
     const { auth, theme } = useSelector(state => state)
     const dispatch = useDispatch()
 
@@ -34,7 +34,7 @@ const CommentCard = ({children, comment, post, commentId}) => {
 
     const handleUpdate = () => {
         if(comment.content !== content){
-            dispatch(updateComment({comment, post, content, auth}))
+            dispatch(updateComment({comment, video, content, auth}))
             setOnEdit(false)
         }else{
             setOnEdit(false)
@@ -47,7 +47,7 @@ const CommentCard = ({children, comment, post, commentId}) => {
         setIsLike(true)
 
         setLoadLike(true)
-        await dispatch(likeComment({comment, post, auth}))
+        await dispatch(likeComment({comment, video, auth}))
         setLoadLike(false)
     }
 
@@ -56,7 +56,7 @@ const CommentCard = ({children, comment, post, commentId}) => {
         setIsLike(false)
 
         setLoadLike(true)
-        await dispatch(unLikeComment({comment, post, auth}))
+        await dispatch(unLikeComment({comment, video, auth}))
         setLoadLike(false)
     }
 
@@ -105,7 +105,7 @@ const CommentCard = ({children, comment, post, commentId}) => {
                             {
                                 content.length > 100 &&
                                 <span className="readMore" onClick={() => setReadMore(!readMore)}>
-                                    {readMore ? 'Спрятать' : 'Развернуть'}
+                                    {readMore ? 'Hide content' : 'Read more'}
                                 </span>
                             }
                         </div>
@@ -118,7 +118,7 @@ const CommentCard = ({children, comment, post, commentId}) => {
                         </small>
 
                         <small className="font-weight-bold mr-3">
-                            {comment.likes.length} Лайки
+                            {comment.likes.length} likes
                         </small>
 
                         {
@@ -126,7 +126,7 @@ const CommentCard = ({children, comment, post, commentId}) => {
                             ? <>
                                 <small className="font-weight-bold mr-3"
                                 onClick={handleUpdate}>
-                                    обновить
+                                    update
                                 </small>
                                 <small className="font-weight-bold mr-3"
                                 onClick={() => setOnEdit(false)}>
@@ -136,7 +136,7 @@ const CommentCard = ({children, comment, post, commentId}) => {
 
                             : <small className="font-weight-bold mr-3"
                             onClick={handleReply}>
-                                {onReply ? 'выйти' :'ответить'}
+                                {onReply ? 'cancel' :'reply'}
                             </small>
                         }
                         
@@ -146,18 +146,18 @@ const CommentCard = ({children, comment, post, commentId}) => {
 
 
                 <div className="d-flex align-items-center mx-2" style={{cursor: 'pointer'}}>
-                    <CommentMenu post={post} comment={comment} setOnEdit={setOnEdit} />
+                    <CommentMenu video={video} comment={comment} setOnEdit={setOnEdit} />
                     <LikeButton isLike={isLike} handleLike={handleLike} handleUnLike={handleUnLike} />
                 </div>
             </div> 
             
             {
                 onReply &&
-                <InputComment post={post} onReply={onReply} setOnReply={setOnReply} >
+                <InputVideoComment video={video} onReply={onReply} setOnReply={setOnReply} >
                     <Link to={`/profile/${onReply.user._id}`} className="mr-1">
                         @{onReply.user.username}:
                     </Link>
-                </InputComment>
+                </InputVideoComment>
             }
 
             {children}
