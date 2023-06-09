@@ -126,6 +126,15 @@ const Info = ({id, auth, profile, dispatch}) => {
                                  {
                                     user._id === auth.user._id
                                     ?  
+        <Box>
+         {user.online ? 
+                        
+                        
+                          <p>offline</p>
+                          :
+                          <p>online</p>
+                          
+                        }
          <Button
                     onClick={() => setOnEdit(true)}
               sx={{ 
@@ -146,6 +155,7 @@ const Info = ({id, auth, profile, dispatch}) => {
                     Редактировать  
                 </Button>         
                             
+                               </Box>     
                                     : 
                                <Box>     
                                
@@ -153,7 +163,7 @@ const Info = ({id, auth, profile, dispatch}) => {
                               
 
                                {isNonMobile && (
-                               
+                               <div> 
                                     <Button sx={{ 
                 position:"absolute",
                 right:{sm:"160px"},
@@ -169,6 +179,15 @@ const Info = ({id, auth, profile, dispatch}) => {
               }} key={user._id}
                                 onClick={() => handleAddUser(user)}> <span style={{marginRight:"5px"}}> <ForumOutlinedIcon/></span> Сообщение
                                 </Button>
+                        {user.online ? 
+                        
+                        
+                          <p>online</p>
+                          :
+                          <p>offline</p>
+                          
+                        }
+                        </div>
                          )}   
                                {!isNonMobile && (
                                

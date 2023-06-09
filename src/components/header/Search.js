@@ -11,7 +11,7 @@ import {Search as SearchIcon} from "@mui/icons-material"
 const Search = () => {
     const [search, setSearch] = useState('')
     const [users, setUsers] = useState([])
-    const [posts, setPosts] = useState([])
+    
 
     const { auth } = useSelector(state => state)
     const dispatch = useDispatch()
@@ -29,11 +29,11 @@ const Search = () => {
             setLoad(true)
             
             const res = await getDataAPI(`search?username=${search}`, auth.token)
-            const res1 = await getDataAPI(`searchpost?content=${search}`, auth.token)
+            
             const users = await res;
-            const posts = await res1;
+            
             setUsers(users.data.users)
-            setPosts(posts.data.posts)
+            
             setLoad(false)
         } catch (err) {
             dispatch({
@@ -43,7 +43,7 @@ const Search = () => {
     }
 const handleClose = () => {
         setSearch('')
-        setPosts([])
+        
         setUsers([])
     }
     
@@ -52,7 +52,7 @@ useEffect(() => {
       if(!menuRef.current.contains(e.target)){
         
         setSearch('')
-        setPosts([])
+        
         setUsers([])
     
         console.log(menuRef.current);
@@ -98,11 +98,7 @@ useEffect(() => {
                         />
                     ))
                 }
-                {
-                    posts.map(post => (
-     <h1>{post.content}</h1>
-                    ))
-                }
+
      
       
             </div>

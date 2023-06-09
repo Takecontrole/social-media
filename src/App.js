@@ -31,11 +31,21 @@ import { useMemo } from "react";
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { themeSettings } from "./theme";
+import { useStateValue } from "./Context/StateProvider";
+import  { default as MusicPlayer }  from "./components/MusicPlayer";
 function App() {
   const { auth, status, videostatus, modal, call } = useSelector(state => state)
   const dispatch = useDispatch()
   const mode = useSelector((state) => state.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
+  const [
+    {
+      
+      isSongPlaying,
+      
+    },
+    
+  ] = useStateValue();
   useEffect(() => {
     dispatch(refreshToken())
  
@@ -100,6 +110,11 @@ function App() {
 
         </Box>
       </div>
+       {isSongPlaying && (
+          <Box style={{position: "sticky", bottom:0}}>
+            <MusicPlayer />
+          </Box>
+            )}
     </Router>
             </ThemeProvider>
   );

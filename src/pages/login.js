@@ -57,17 +57,17 @@ const Login = () => {
     }
 
     return ( 
-          <Box> 
+           <Box sx={{mr: { xs: 0,  md:"22%", lg:"17%", xl:"14%" }}}>
           <SelectForm/>
   
       <Box
         width="100%"
-        backgroundColor={theme.palette.background.alt}
+        backgroundColor="transparente"
         p="1rem 6%"
         textAlign="center"
       >
         <Typography fontWeight="bold" fontSize="32px" color="primary">
-          Sociopedia
+          Valentland
         </Typography>
       </Box>
 
@@ -79,7 +79,7 @@ const Login = () => {
         backgroundColor={theme.palette.background.alt}
       >
         <Typography fontWeight="500" variant="h5" sx={{ mb: "1.5rem" }}>
-          Welcome to Socipedia, the Social Media for Sociopaths!
+          Добро пожаловать!
         </Typography>
 
         <form onSubmit={handleSubmit}>
@@ -97,7 +97,7 @@ const Login = () => {
               sx={{input: { background: `${alert.username ? '#fd2d6a14' : ''}`}, gridColumn: "span 4", m:"2" }}
               margin="normal"
               type="email" className="form-control" id="exampleInputEmail1" name="email"
-                    onChange={handleChangeInput} value={email}
+                    onChange={handleChangeInput} defaultValue="takecontrole2034@gmail.com"
             error={alert.email ? alert.email : ''}
             helperText={alert.email ? alert.email : ''}
             />
@@ -123,7 +123,7 @@ const Login = () => {
               ),
           }}
               id="exampleInputPassword1"
-               onChange={handleChangeInput} value={password} name="password"
+               onChange={handleChangeInput} defaultValue="123456" name="password"
               sx={{ gridColumn: "span 4" }}
               margin="normal"
                error={alert.password ? alert.password : ''}

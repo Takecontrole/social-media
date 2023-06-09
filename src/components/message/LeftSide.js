@@ -84,10 +84,10 @@ const LeftSide = () => {
         <>
             <form className="message_header" onSubmit={handleSearch} >
                 <input type="text" value={search}
-                placeholder="Enter to Search..."
+                placeholder="Поиск..."
                 onChange={e => setSearch(e.target.value)} />
 
-                <button type="submit" style={{display: 'none'}}>Search</button>
+                <button type="submit" style={{display: 'none'}}>Поиск</button>
             </form>
 
             <div className="message_chat_list">
@@ -120,6 +120,14 @@ const LeftSide = () => {
                                         }
                                         
                                     </UserCard>
+                                                                      {
+                                            user.online
+                                            ? <i className="fas fa-circle text-success" />
+                                            : auth.user.following.find(item => 
+                                                item._id === user._id
+                                            ) && <i className="fas fa-circle" />
+                                                
+                                        }
                                 </div>
                             ))
                         }

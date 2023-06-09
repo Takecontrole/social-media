@@ -46,11 +46,41 @@ const Home = () => {
                    <Box
           flexBasis={isNonMobileScreens ? "65%" : undefined}
           mt={isNonMobileScreens ? undefined : "2rem"}
-        >
+        > 
 
-           
-              
-                <Status />
+                                      <Status />
+                                      
+                                  {!isNonMobileScreens && (
+                                                      <Box position="relative"
+                     marginTop="1rem"     height="60px"
+                     marginBottom="1rem"  
+        >     
+                  <AppBar position="absolute" top="0" color="default" sx={{  
+                     borderRadius:"22px ! important", zIndex:"0 !important"}} >
+        <Tabs
+          onChange={handleTabsChange}
+          value={tabvalue}
+          indicatorColor="primary"
+          textColor="black"
+          variant="scrollable"
+          scrollButtons="auto"
+          aria-label="scrollable auto tabs example" 
+          
+        >
+            <Tab sx={{"&:focus": { outline: "none !important"}, "&.Mui-selected": {
+          backgroundColor: `white ! important`,
+         borderRadius:"22px !important", boxShadow: '0 4px 12px 0 rgba(0,0,0,0.16)',margin:"5px"}, margin:"5px"}} label="Посты" />
+          <Tab sx={{"&:focus": { outline: "none !important"}, "&.Mui-selected": {
+          backgroundColor: `white ! important`,
+         borderRadius:"22px !important", boxShadow: '0 4px 12px 0 rgba(0,0,0,0.16)',margin:"5px"},margin:"5px"}}  label="Видео"  />
+          <Tab sx={{"&:focus": { outline: "none !important"}, "&.Mui-selected": {
+          backgroundColor: `white ! important`,
+         borderRadius:"22px !important", boxShadow: '0 4px 12px 0 rgba(0,0,0,0.16)',margin:"5px"}, margin:"5px"}} label="Фото" />
+        </Tabs>
+      </AppBar> 
+      </Box>
+          )}
+          
            {tabvalue === 0 && <div className="posts"> 
                 {
                     homePosts.loading 
@@ -58,7 +88,7 @@ const Home = () => {
                     style={{width: "100px",
     height:"100px"}} alt="loading" className="d-block mx-auto" />
                     : (homePosts.result === 0 && homePosts.posts.length === 0)
-                        ? <h2 className="text-center">No Post</h2>
+                        ? <h2 className="text-center">Нет постов</h2>
                         : <Posts />
                 }
                       </div>} 
@@ -86,14 +116,15 @@ const Home = () => {
           aria-label="scrollable auto tabs example" 
           backgroundColor="transparent"
           overflow="hidden"
+          sx={{display:"flex", justifyContent:"center", alignItems:"center"}}
         >
-          <Tab sx={{"&:focus": { outline: "none !important"}, "&.Mui-selected": {
+          <Tab sx={{minWidth:{md:"250px", lg:"350px", xl:"450px"},"&:focus": { outline: "none !important"}, "&.Mui-selected": {
           backgroundColor: `white ! important`,
          borderRadius:"22px !important", boxShadow: '0 4px 12px 0 rgba(0,0,0,0.16)',margin:"5px"}, margin:"5px"}} label="Посты" />
-          <Tab sx={{"&:focus": { outline: "none !important"}, "&.Mui-selected": {
+          <Tab sx={{minWidth:{md:"250px", lg:"350px", xl:"450px"},"&:focus": { outline: "none !important"}, "&.Mui-selected": {
           backgroundColor: `white ! important`,
          borderRadius:"22px !important", boxShadow: '0 4px 12px 0 rgba(0,0,0,0.16)',margin:"5px"},margin:"5px"}}  label="Видео"  />
-          <Tab sx={{"&:focus": { outline: "none !important"}, "&.Mui-selected": {
+          <Tab sx={{minWidth:{md:"250px", lg:"350px", xl:"450px"},"&:focus": { outline: "none !important"}, "&.Mui-selected": {
           backgroundColor: `white ! important`,
          borderRadius:"22px !important", boxShadow: '0 4px 12px 0 rgba(0,0,0,0.16)',margin:"5px"}, margin:"5px"}} label="Фото" />
         </Tabs>

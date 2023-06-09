@@ -39,7 +39,7 @@ import AvatarDropdown from "./AvatarDropdown";
 import Person2TwoToneIcon from '@mui/icons-material/Person2TwoTone';
 import SearchIcon from '@mui/icons-material/Search';
 import BookmarksIcon from '@mui/icons-material/Bookmarks';
-
+import LibraryMusicOutlinedIcon from '@mui/icons-material/LibraryMusicOutlined';
 const Sidebar = ({ isSidebarOpen, setIsSidebarOpen, drawerWidth}) => {
   const isNonMobile = useMediaQuery("(min-width: 801px)");
   const { auth } = useSelector(state => state)
@@ -78,6 +78,11 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen, drawerWidth}) => {
     text: "Закладки",
     path: '/favorite',
     icon: <BookmarksIcon />,
+  },
+  {
+    text: "Музыка",
+    path: '/music',
+    icon: <LibraryMusicOutlinedIcon />,
   },
 
 ];

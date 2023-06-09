@@ -14,7 +14,7 @@ const Message = () => {
 
                     <i className="fab fa-facebook-messenger text-primary"
                     style={{fontSize: '5rem'}} />
-                    <h4>Messenger</h4>
+                    <h4>Мессенджер</h4>
 
                 </div>
             </div>

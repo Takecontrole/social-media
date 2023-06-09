@@ -64,18 +64,18 @@ const Register = () => {
     }
 
     return ( 
-                      <Box> 
+        <Box sx={{mr: { xs: 0,  md:"22%", lg:"17%", xl:"14%" }}}>
           <SelectForm/>
  
       <Box
         width="100%"
-        backgroundColor={theme.palette.background.alt}
+        backgroundColor="transparente"
         p="1rem 6%"
         textAlign="center"
       > 
 
         <Typography fontWeight="bold" fontSize="32px" color="primary">
-          Sociopedia
+          Valentland
         </Typography>
       </Box>
 
@@ -87,7 +87,7 @@ const Register = () => {
         backgroundColor={theme.palette.background.alt}
       >
         <Typography fontWeight="500" variant="h5" sx={{ mb: "1.5rem" }}>
-          Welcome to Socipedia, the Social Media for Sociopaths!
+          Добро пожаловать!
         </Typography>
 
         <form onSubmit={handleSubmit}>
@@ -230,9 +230,7 @@ const Register = () => {
                 "&:hover": { color: palette.primary.main },
               }}
             >
-              
-           
-                    В IT
+                    Зарегистрироваться
                 </Button>
        
               </Box>

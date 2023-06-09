@@ -88,7 +88,37 @@ const AdvancedSearch = () => {
                    <Box
           flexBasis={isNonMobileScreens ? "65%" : undefined}
           mt={isNonMobileScreens ? undefined : "2rem"}
+        > 
+                                          {!isNonMobileScreens && (
+                                                      <Box position="relative"
+                     marginTop="1rem"     height="60px"
+                     marginBottom="1rem"  
+        >     
+                  <AppBar position="absolute" top="0" color="default" sx={{  
+                     borderRadius:"22px ! important", zIndex:"0 !important"}} >
+        <Tabs
+          onChange={handleTabsChange}
+          value={tabvalue}
+          indicatorColor="primary"
+          textColor="black"
+          variant="scrollable"
+          scrollButtons="auto"
+          aria-label="scrollable auto tabs example" 
+          
         >
+            <Tab sx={{"&:focus": { outline: "none !important"}, "&.Mui-selected": {
+          backgroundColor: `white ! important`,
+         borderRadius:"22px !important", boxShadow: '0 4px 12px 0 rgba(0,0,0,0.16)',margin:"5px"}, margin:"5px"}} label="Посты" />
+          <Tab sx={{"&:focus": { outline: "none !important"}, "&.Mui-selected": {
+          backgroundColor: `white ! important`,
+         borderRadius:"22px !important", boxShadow: '0 4px 12px 0 rgba(0,0,0,0.16)',margin:"5px"},margin:"5px"}}  label="Посты"  />
+          <Tab sx={{"&:focus": { outline: "none !important"}, "&.Mui-selected": {
+          backgroundColor: `white ! important`,
+         borderRadius:"22px !important", boxShadow: '0 4px 12px 0 rgba(0,0,0,0.16)',margin:"5px"}, margin:"5px"}} label="Видео" />
+        </Tabs>
+      </AppBar> 
+      </Box>
+          )}
         <form className="search_form" onSubmit={handleSearch}>
           <FlexBetween
             
@@ -114,13 +144,14 @@ const AdvancedSearch = () => {
       {tabvalue === 0 && <div>
                                       {
                     filteredProducts.map(user => (
+                    <Box marginTop="1rem">
                         <SearchUserCard 
                         key={user._id} 
                         user={user} 
                         border="border"
                         
                         /> 
-                        
+                      </Box>   
                     ))
                 }
       </div>}
