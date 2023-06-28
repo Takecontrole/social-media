@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import {Tabs, Tab, AppBar, TextField, Divider} from "@mui/material"
 import {
   getStorage,
   ref,
@@ -69,7 +70,7 @@ export const ImageUploader = ({
         alertMsg("File upload failed.");
         setTimeout(() => {
           setAlert(null);
-        }, 4000);
+        }, 1000);
         isLoading(false);
       },
       () => {
@@ -81,7 +82,7 @@ export const ImageUploader = ({
           alertMsg("File uploaded successfully");
           setTimeout(() => {
             setAlert(null);
-          }, 4000);
+          }, 1000);
         });
       }
     );
@@ -95,7 +96,7 @@ export const ImageUploader = ({
             <BiCloudUpload />
           </p>
           <p >
-            click to upload {isImage ? "image" : "audio"}
+            Жми, чтоб загрузить {isImage ? "image" : "audio"}
           </p>
         </div>
       </div>
@@ -104,7 +105,7 @@ export const ImageUploader = ({
         name="upload-image"
         accept={`${isImage ? "image/*" : "audio/*"}`}
         onChange={uploadImage}
-        
+        style={{width:"0px", height:"0px"}}
       />
     </label>
   );
@@ -132,7 +133,7 @@ export const DisabledButton = () => {
           fill="currentColor"
         />
       </svg>
-      Loading...
+      Грузим...
     </button>
   );
 };
@@ -150,7 +151,7 @@ const DashboardNewSong = () => {
   const [audioAsset, setAudioAsset] = useState(null);
   const [duration, setDuration] = useState(null);
   const audioRef = useRef();
-
+  const [tabvalue, setTabValue] = useState(0); 
   const [
     {
       artists,
@@ -162,7 +163,16 @@ const DashboardNewSong = () => {
     },
     dispatch,
   ] = useStateValue();
-
+  const [artist, setArtist] = useState("");
+  const [album, setAlbum] = useState("");
+  const [language, setLanguage] = useState(""); 
+  const [category, setCategory] = useState("");
+  const handleTabsChange = (event, newValue) => {
+    console.log(event);
+    console.log(newValue);
+    setTabValue(newValue);
+  };
+  
   useEffect(() => {
     if (!artists) {
       getAllArtist().then((data) => {
@@ -219,10 +229,10 @@ const DashboardNewSong = () => {
         name: songName,
         imageURL: songImageUrl,
         songUrl: audioAsset,
-        album: albumFilter,
-        artist: artistFilter,
-        language: languageFilter,
-        category: filterTerm,
+        album: album,
+        artist: artist,
+        language: language,
+        category: category,
       };
 
       saveNewSong(data).then((res) => {
@@ -238,37 +248,92 @@ const DashboardNewSong = () => {
       setIsImageLoading(false);
       setIsAudioLoading(false);
       setSongName("");
+      setArtist("");
+      setAlbum("");
+      setLanguage("");
+      setCategory("");
       setSongImageUrl(null);
       setAudioAsset(null);
-      dispatch({ type: actionType.SET_ARTIST_FILTER, artistFilter: null });
-      dispatch({ type: actionType.SET_LANGUAGE_FILTER, languageFilter: null });
-      dispatch({ type: actionType.SET_ALBUM_FILTER, albumFilter: null });
-      dispatch({ type: actionType.SET_FILTER_TERM, filterTerm: null });
       setDuration(null);
     }
   };
 
   return (
-    <div >
-      <div >
+    <div style={{position:"relative"}}>
+            <AppBar position="absolute"  top="0" color="default" style={{zIndex:0, backgroundColor:"white"}} elevation={0}>
+        <Tabs
+          onChange={handleTabsChange}
+          value={tabvalue}
+          indicatorColor="transparent"
+          textColor="black"
+          variant="scrollable"
+          scrollButtons="auto"
+          aria-label="scrollable auto tabs example" 
+        >
+            <Tab sx={{"&:focus": { outline: "none !important"}, "&.Mui-selected": {
+          backgroundColor: `white ! important`,
+         borderRadius:"22px !important", boxShadow: '0 4px 12px 0 rgba(0,0,0,0.16)',margin:"5px"}, margin:"5px"}} label="Импорт музыки" />
+          <Tab sx={{"&:focus": { outline: "none !important"}, "&.Mui-selected": {
+          backgroundColor: `white ! important`,
+         borderRadius:"22px !important", boxShadow: '0 4px 12px 0 rgba(0,0,0,0.16)',margin:"5px"},margin:"5px"}}  label="Новый альбом"  />
+          <Tab sx={{"&:focus": { outline: "none !important"}, "&.Mui-selected": {
+          backgroundColor: `white ! important`,
+         borderRadius:"22px !important", boxShadow: '0 4px 12px 0 rgba(0,0,0,0.16)',margin:"5px"}, margin:"5px"}} label="Новый музыкант" />
+        </Tabs>
+      </AppBar> 
+                         {tabvalue === 0 &&
+      <div>
         <div >
-          <input
-            type="text"
-            placeholder="Type your song name"
-            
+                         <TextField 
+             fullWidth
+              label="Название"
+              sx={{gridColumn: "span 4", m:"2" }}
+              margin="normal"
+             type="text"
             value={songName}
             onChange={(e) => setSongName(e.target.value)}
+            style={{marginTop:"150px"}}
+            />
+
+                         <TextField 
+             fullWidth
+              label="Музыкант"
+              sx={{gridColumn: "span 4", m:"2" }}
+              margin="normal"
+            type="text"
+            value={artist}
+            onChange={(e) => setArtist(e.target.value)}
+          />
+                                  <TextField 
+             fullWidth
+              label="Альбом"
+              sx={{gridColumn: "span 4", m:"2" }}
+              margin="normal"
+            type="text"
+            value={album}
+            onChange={(e) => setAlbum(e.target.value)}
+          />
+               <TextField 
+             fullWidth
+              label="Язык"
+              sx={{gridColumn: "span 4", m:"2" }}
+              margin="normal"
+            type="text"
+            value={language}
+            onChange={(e) => setLanguage(e.target.value)}
+          />
+                                  <TextField 
+             fullWidth
+              label="Жанр"
+              sx={{gridColumn: "span 4", m:"2" }}
+              margin="normal"
+            type="text"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
           />
 
-          <div >
-            <FilterButtons filterData={artists} flag={"Artist"} />
-            <FilterButtons filterData={allAlbums} flag={"Albums"} />
-            <FilterButtons filterData={filterByLanguage} flag={"Language"} />
-            <FilterButtons filterData={filters} flag={"Category"} />
-          </div>
-
-          <div >
-            <div >
+          <div style={{display:"flex", flexDirection:"column",alignItems:"center", justifyContent:"center", textAlign:"center"}}  >
+            <div style={{position: "relative",width:"100%", height:"300px", borderRadius:"15px", backgroundColor:"#C2C2C2", marginBottom:"1rem", marginTop:"1rem", display:"flex", flexDirection:"column",alignItems:"center", justifyContent:"center", textAlign:"center", cursor:"pointer",overflow:"hidden"  }}>
               {isImageLoading && <ImageLoader progress={uploadProgress} />}
               {!isImageLoading && (
                 <>
@@ -283,14 +348,15 @@ const DashboardNewSong = () => {
                     />
                   ) : (
                     <div >
-                      <img
+                      <img 
                         src={songImageUrl}
                         alt="uploaded image" 
-                        style={{width:"70px", height:"70px"}}
+                        style={{width:"100%", height:"100%", objectFit:"cover"}}
+                       
                          />
                       <button
                         type="button"
-                        
+                        style={{position: "absolute", bottom:"1rem", right:"1rem", border:"none", backgroundColor:"transparent"}}
                         onClick={() => {
                           deleteImageObject(songImageUrl, "image");
                         }}
@@ -302,8 +368,8 @@ const DashboardNewSong = () => {
                 </>
               )}
             </div>
-
-            <div >
+            <Divider/>
+            <div style={{position: "relative",width:"100%", height:"150px", borderRadius:"15px", backgroundColor:"#C2C2C2", marginBottom:"1rem", marginTop:"1rem", display:"flex", flexDirection:"column",alignItems:"center", justifyContent:"center", textAlign:"center", cursor:"pointer",overflow:"hidden"  }} >
               {isAudioLoading && <ImageLoader progress={uploadProgress} />}
               {!isAudioLoading && (
                 <>
@@ -321,7 +387,7 @@ const DashboardNewSong = () => {
                       <audio ref={audioRef} src={audioAsset} controls />
                       <button
                         type="button"
-                        
+                        style={{position: "absolute", bottom:"1rem", right:"1rem", border:"none", backgroundColor:"transparent"}}
                         onClick={() => {
                           deleteImageObject(audioAsset, "audio");
                         }}
@@ -335,25 +401,33 @@ const DashboardNewSong = () => {
             </div>
 
             <div >
-              {isImageLoading || isAudioLoading ? (
+           {isImageLoading || isAudioLoading ? (
                 <DisabledButton />
               ) : (
                 <motion.button
                   whileTap={{ scale: 0.75 }}
-                  
+                  style={{width:"150px", border:"none", borderRadius:"15px", backgroundColor:"#DC143C", color:"white", padding:"0.5rem", }}
                   onClick={saveSong}
                 >
-                  Send
+                  Загрузить
                 </motion.button>
               )}
             </div>
           </div>
+          
         </div>
-        <div >
-          <AddNewArtist />
-          <AddNewAlbum />
-        </div>
+
       </div>
+                         }
+                                                  {tabvalue === 2 && 
+          <AddNewArtist />
+               
+      }
+                   {tabvalue === 1 && 
+
+          
+          <AddNewAlbum />
+      }
       {setAlert && (
         <>
           {setAlert === "success" ? (
@@ -363,6 +437,7 @@ const DashboardNewSong = () => {
           )}
         </>
       )}
+
     </div>
   );
 };
@@ -376,9 +451,7 @@ export const AddNewArtist = () => {
   const [artistCoverImage, setArtistCoverImage] = useState(null);
 
   const [artistName, setArtistName] = useState("");
-  const [twitter, setTwitter] = useState("");
-  const [instagram, setInstagram] = useState("");
-
+  
   const [{ artists }, dispatch] = useStateValue();
 
   const deleteImageObject = (songURL) => {
@@ -390,7 +463,7 @@ export const AddNewArtist = () => {
       setAlertMsg("File removed successfully");
       setTimeout(() => {
         setAlert(null);
-      }, 4000);
+      }, 1000);
       setIsArtist(false);
     });
   };
@@ -401,14 +474,12 @@ export const AddNewArtist = () => {
       setAlertMsg("Required fields are missing");
       setTimeout(() => {
         setAlert(null);
-      }, 4000);
+      }, 1000);
     } else {
       setIsArtist(true);
       const data = {
         name: artistName,
         imageURL: artistCoverImage,
-        twitter: twitter,
-        instagram: instagram,
       };
       saveNewArtist(data).then((res) => {
         getAllArtist().then((artistData) => {
@@ -418,14 +489,22 @@ export const AddNewArtist = () => {
       setIsArtist(false);
       setArtistCoverImage(null);
       setArtistName("");
-      setTwitter("");
-      setInstagram("");
     }
   };
 
   return (
-    <div >
-      <div >
+  <div>
+          <TextField 
+             fullWidth
+              label="Имя"
+              sx={{gridColumn: "span 4", m:"2", marginTop:"90px"}}
+              margin="normal"
+            type="text"
+            value={artistName}
+          onChange={(e) => setArtistName(e.target.value)}
+          />
+    <div style={{display:"flex", flexDirection:"column",alignItems:"center", justifyContent:"center", textAlign:"center"}}  >
+            <div style={{position: "relative",width:"100%", height:"300px", borderRadius:"15px", backgroundColor:"#C2C2C2", marginBottom:"1rem", marginTop:"1rem", display:"flex", flexDirection:"column",alignItems:"center", justifyContent:"center", textAlign:"center", cursor:"pointer",overflow:"hidden"  }}>
         {isArtist && <ImageLoader progress={artistProgress} />}
         {!isArtist && (
           <>
@@ -439,74 +518,42 @@ export const AddNewArtist = () => {
                 isImage={true}
               />
             ) : (
-              <div >
-                <img
-                  src={artistCoverImage}
-                  alt="uploaded image"
-                  style={{width:"70px", height:"70px"}}
-                />
-                <button
-                  type="button"
-                  
-                  onClick={() => {
+            
+                               <div >
+                      <img 
+                        src={artistCoverImage}
+                        alt="uploaded image" 
+                        style={{width:"100%", height:"100%", objectFit:"cover"}}
+                       
+                         />
+                      <button
+                        type="button"
+                        style={{position: "absolute", bottom:"1rem", right:"1rem", border:"none", backgroundColor:"transparent"}}
+                        onClick={() => {
                     deleteImageObject(artistCoverImage);
                   }}
-                >
-                  <MdDelete  />
-                </button>
-              </div>
+                      >
+                        <MdDelete className="text-white" />
+                      </button>
+                    </div>
             )}
           </>
         )}
       </div>
 
-      <div >
-        <input
-          type="text"
-          placeholder="Artist Name"
-            value={artistName}
-          onChange={(e) => setArtistName(e.target.value)}
-        />
-
         <div >
-          <p >
-            www.twitter.com/
-          </p>
-          <input
-            type="text"
-            placeholder="your id"
-             value={twitter}
-            onChange={(e) => setTwitter(e.target.value)}
-          />
-        </div>
-
-        <div >
-          <p >
-            www.instagram.com/
-          </p>
-          <input
-            type="text"
-            placeholder="your id"
-            className="w-full text-base font-semibold text-textColor outline-none bg-transparent"
-            value={instagram}
-            onChange={(e) => setInstagram(e.target.value)}
-          />
-        </div>
-
-        <div className="w-full lg:w-300 flex items-center justify-center lg:justify-end">
           {isArtist ? (
             <DisabledButton />
           ) : (
-            <motion.button
-              whileTap={{ scale: 0.75 }}
-              className="px-8 py-2 rounded-md text-white bg-red-600 hover:shadow-lg"
-              onClick={saveArtist}
-            >
-              Send
-            </motion.button>
+                <motion.button
+                  whileTap={{ scale: 0.75 }}
+                  style={{width:"150px", border:"none", borderRadius:"15px", backgroundColor:"#DC143C", color:"white", padding:"0.5rem", }}
+                  onClick={saveArtist}
+                >
+                  Загрузить
+                </motion.button>
           )}
         </div>
-      </div>
 
       {alert && (
         <>
@@ -517,6 +564,7 @@ export const AddNewArtist = () => {
           )}
         </>
       )}
+    </div>
     </div>
   );
 };
@@ -575,9 +623,21 @@ export const AddNewAlbum = () => {
   };
 
   return (
-    <div >
-      <div >
-        {isArtist && <ImageLoader progress={artistProgress} />}
+  <div>
+    <TextField 
+             fullWidth
+              label="Имя"
+              sx={{gridColumn: "span 4", m:"2", marginTop:"90px"}}
+              margin="normal"
+          type="text"
+          value={artistName}
+          onChange={(e) => setArtistName(e.target.value)}
+          />
+
+     
+    <div style={{display:"flex", flexDirection:"column",alignItems:"center", justifyContent:"center", textAlign:"center"}}  >
+            <div style={{position: "relative",width:"100%", height:"300px", borderRadius:"15px", backgroundColor:"#C2C2C2", marginBottom:"1rem", marginTop:"1rem", display:"flex", flexDirection:"column",alignItems:"center", justifyContent:"center", textAlign:"center", cursor:"pointer",overflow:"hidden"  }}>
+                      {isArtist && <ImageLoader progress={artistProgress} />}
         {!isArtist && (
           <>
             {!artistCoverImage ? (
@@ -589,50 +649,42 @@ export const AddNewAlbum = () => {
                 setProgress={setArtistProgress}
                 isImage={true}
               />
-            ) : (
-              <div >
-                <img
-                  src={artistCoverImage}
-                  alt="uploaded image"
-                  style={{width:"70px", height:"70px"}}
-                />
-                <button
-                  type="button"
-                  
-                  onClick={() => {
+                  ) : (
+                    <div >
+                      <img 
+                        src={artistCoverImage}
+                        alt="uploaded image"
+                        style={{width:"100%", height:"100%", objectFit:"cover"}}
+                       
+                         />
+                      <button
+                        type="button"
+                        style={{position: "absolute", bottom:"1rem", right:"1rem", border:"none", backgroundColor:"transparent"}}
+                        onClick={() => {
                     deleteImageObject(artistCoverImage);
                   }}
-                >
-                  <MdDelete />
-                </button>
-              </div>
-            )}
-          </>
-        )}
-      </div>
-
-      <div >
-        <input
-          type="text"
-          placeholder="Artist Name"
-            value={artistName}
-          onChange={(e) => setArtistName(e.target.value)}
-        />
+                      >
+                        <MdDelete className="text-white" />
+                      </button>
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
 
         <div >
           {isArtist ? (
             <DisabledButton />
           ) : (
-            <motion.button
-              whileTap={{ scale: 0.75 }}
-              
-              onClick={saveArtist}
-            >
-              Send
-            </motion.button>
+                           <motion.button
+                  whileTap={{ scale: 0.75 }}
+                  style={{width:"150px", border:"none", borderRadius:"15px", backgroundColor:"#DC143C", color:"white", padding:"0.5rem", }}
+                  onClick={saveNewAlbum}
+                >
+                  Загрузить
+                </motion.button>
           )}
         </div>
-      </div>
 
       {alert && (
         <>
@@ -643,6 +695,7 @@ export const AddNewAlbum = () => {
           )}
         </>
       )}
+    </div>
     </div>
   );
 };

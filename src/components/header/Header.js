@@ -23,7 +23,7 @@ const isNonMobile = useMediaQuery("(min-width: 801px)");
 
                     
                                           <Typography onClick={() => window.scrollTo({top: 0})} color={theme.palette.primary.main} sx={{ml:{sx:0.5,md:8}, fontSize:{sx:"8px", md:"12"}}}  fontWeight="bold">
-                    VALENTLAND
+                    VALENLAND
                   </Typography>
                    
                 </Link>

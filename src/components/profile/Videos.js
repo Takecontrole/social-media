@@ -62,7 +62,7 @@ breakpoints={{
       spaceBetween: 20
     }
       }}
-style={{position:"absolute",top:"4rem",width:"100%", }}
+style={{position:"absolute",top:"4rem",width:"100%", zIndex:0 }}
 > 
 
 {videos.map(video => ( 
@@ -83,15 +83,8 @@ style={{position:"absolute",top:"4rem",width:"100%", }}
 <VideoCarousel images={video.images} id={video._id} />
 </Link>
 </Box>
-
-{/*
-<VideoCardFooter video={video}/>
-<VideoCardHeader video={video}/>
-    <Typography sx={{fontSize:{xs:"14px",md:"16px",lg:"20px"}}} mt="0.5rem">{video.user.avatar}</Typography> 
-   */} 
   <Typography sx={{posotion:"absolutel", mx:"0.5rem", fontSize:{xs:"14px",md:"16px",lg:"20px"}}} mt="0.5rem">{video.content}</Typography>  
 </SwiperSlide>
-  
 ))}
 
 </Swiper>

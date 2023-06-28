@@ -60,7 +60,7 @@ const Home = () => {
         <Tabs
           onChange={handleTabsChange}
           value={tabvalue}
-          indicatorColor="primary"
+          indicatorColor="transparent"
           textColor="black"
           variant="scrollable"
           scrollButtons="auto"

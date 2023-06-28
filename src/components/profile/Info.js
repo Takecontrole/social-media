@@ -127,14 +127,25 @@ const Info = ({id, auth, profile, dispatch}) => {
                                     user._id === auth.user._id
                                     ?  
         <Box>
-         {user.online ? 
-                        
-                        
+                                       {isNonMobile && (
+         <Box>
+             {user.online ? 
                           <p>offline</p>
                           :
                           <p>online</p>
-                          
                         }
+         </Box>
+                        )}
+                                       {!isNonMobile && (
+         <Box marginTop="5rem">
+             {user.online ? 
+                          <p>offline</p>
+                          :
+                          <p>online</p>
+                        }
+         </Box>
+                        )}
+                        
          <Button
                     onClick={() => setOnEdit(true)}
               sx={{ 

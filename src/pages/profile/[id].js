@@ -12,6 +12,7 @@ import LoadIcon from '../../images/loading.gif'
 import { getProfileUsers } from '../../redux/actions/profileAction'
 import { useParams } from 'react-router-dom'
 import Videos from '../../components/profile/Videos'
+import Music from '../../components/profile/Music'
 import StatusVideo from '../../components/home/StatusVideo'
 import Status from '../../components/home/Status'
 const Profile = () => {
@@ -47,7 +48,7 @@ const Profile = () => {
   ventana = "250px";
 }
 else if(tabvalue === 2) {
-  ventana = "250px";
+  ventana = "550px";
 }
 else {
   ventana = "0";
@@ -80,16 +81,15 @@ else {
         height={ventana}
         backgroundColor="white"
         display= "flex"
-        alignItems="center"
         borderRadius="22px"
         px="0.5rem"
         overflow="hidden"
         >     
-        <AppBar position="absolute" top="0" color="default">
+        <AppBar position="absolute" top="0" color="default" elevation={0} sx={{backgroundColor:"white",}}>
         <Tabs
           onChange={handleTabsChange}
           value={tabvalue}
-          indicatorColor="primary"
+          indicatorColor="transparent"
           textColor="black"
           variant="scrollable"
           scrollButtons="auto"
@@ -113,6 +113,14 @@ else {
            
                    <Videos auth={auth} profile={profile} dispatch={dispatch} id={id}/>
           <StatusVideo/>
+      </Box>
+      }
+      
+           {tabvalue === 2 && 
+      <Box mt="4rem" width="100%">
+           
+                   <Music/>
+       
       </Box>
       }
 

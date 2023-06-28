@@ -111,7 +111,7 @@ function App() {
         </Box>
       </div>
        {isSongPlaying && (
-          <Box style={{position: "sticky", bottom:0}}>
+          <Box style={{position: "sticky", bottom:"1rem", zIndex:50000}}>
             <MusicPlayer />
           </Box>
             )}

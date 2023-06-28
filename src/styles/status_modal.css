@@ -16,6 +16,27 @@
     margin: 30px auto;
     padding: 10px;
     border-radius: 22px;
+    
+}
+.status_modal_bg{
+    width: 100vw;
+    background: white;
+    margin: auto;
+    height: 100vh;
+    max-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.status_modal_add_song{
+    max-width: 550px;
+    background: white;
+    margin: auto;
+    padding: 10px;
+    height: auto;
+    max-height: 100vh;
+    border-radius: 22px;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 .status_header{
     display: flex;
@@ -30,12 +51,24 @@
     cursor: pointer;
     transform: translateY(-5px);
 }
+
+.status_body {
+    position: relative;
+  display: flex;
+  flex-direction: column;
+  
+}
+.status_body textarea{
+    overflow: scroll;
+}
 .status_body textarea{
     width: 100%;
     min-height: 150px;
     border: none;
     outline: none;
     resize: none;
+    max-height: 100vh;
+    overflow: scroll;
 }
 .status_body .input_images{
     display: flex;
@@ -106,4 +139,47 @@
 }
 .status_body .dropdown-menu{
     transform: translate3d(-153px, -190px, 0px) !important;
+}
+.status_head {
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: 600;
+  color: white;
+}
+.status_head h5{
+  margin: 1rem;
+}
+.status_head_btn{
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgb(0,0,0,0.3);
+  border-radius: 50%;
+  border: none;
+  color: white;
+  margin:1rem;
+  padding: 0.3rem;
+  z-index: 10;
+}
+
+.playlist {
+  width:550px;
+}
+.welcome {
+  display:flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+ justify-content: center; 
+  text-align: center;
+}
+@media only screen and (max-width: 600px) {
+  .playlist{
+    width: 100%;
+  }
 }

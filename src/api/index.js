@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const baseURL = "https://social-media-music.adaptable.app/";
-
+//https://social-media-music.adaptable.app/
 export const validateUser = async (token) => {
   try {
     const res = await axios.get(`${baseURL}api/users/login`, {
