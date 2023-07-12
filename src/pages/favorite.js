@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Saved from '../components/profile/Saved'
 import {Box, useMediaQuery, IconButton,
-  InputBase, Tabs, Tab, AppBar, Divider} from "@mui/material"
+  InputBase, Divider} from "@mui/material"
 import { useSelector, useDispatch } from 'react-redux'
 
 
@@ -63,31 +63,7 @@ const Favorite = () => {
 
                   {isNonMobileScreens && (
     <Box flexBasis="35%" sx={{ml:"0.7rem"}} > 
-                                          <AppBar position="static" color="default" sx={{      
-                     borderRadius:"22px ! important"                       }}>
-        <Tabs
-          onChange={handleTabsChange}
-          value={tabvalue}
-          orientation="vertical"
-          indicatorColor="transparent"
-          textColor="black"
-          variant="scrollable"
-          scrollButtons="auto"
-          aria-label="scrollable auto tabs example" 
-          backgroundColor="transparent"
-          overflow="hidden"
-        >
-          <Tab sx={{"&:focus": { outline: "none !important"}, "&.Mui-selected": {
-          backgroundColor: `white ! important`,
-         borderRadius:"22px !important", boxShadow: '0 4px 12px 0 rgba(0,0,0,0.16)',margin:"5px"}, margin:"5px"}} label="Посты" />
-          <Tab sx={{"&:focus": { outline: "none !important"}, "&.Mui-selected": {
-          backgroundColor: `white ! important`,
-         borderRadius:"22px !important", boxShadow: '0 4px 12px 0 rgba(0,0,0,0.16)',margin:"5px"},margin:"5px"}}  label="Видео"  />
-          <Tab sx={{"&:focus": { outline: "none !important"}, "&.Mui-selected": {
-          backgroundColor: `white ! important`,
-         borderRadius:"22px !important", boxShadow: '0 4px 12px 0 rgba(0,0,0,0.16)',margin:"5px"}, margin:"5px"}} label="Фото" />
-        </Tabs>
-      </AppBar> 
+                                          
 
             </Box>
             )}   

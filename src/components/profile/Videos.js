@@ -4,7 +4,6 @@ import VideoCarousel from '../VideoCarousel'
 import VideoCardHeader from '../home/video_card/VideoCardHeader'
 import VideoCardFooter from '../home/video_card/VideoCardFooter'
 import { getDataAPI } from '../../utils/fetchData'
-import { VIDEO_TYPES } from '../../redux/actions/videoAction'
 import { Box, Typography } from "@mui/material"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css';

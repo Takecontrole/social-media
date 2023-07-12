@@ -4,6 +4,7 @@ export const GLOBALTYPES = {
     THEME: 'THEME',
     STATUS: 'STATUS',
     VIDEOSTATUS: 'VIDEOSTATUS',
+    PHOTOSTATUS: 'PHOTOSTATUS',
     MODAL: 'MODAL',
     SOCKET: 'SOCKET',
     ONLINE: 'ONLINE',
@@ -12,9 +13,9 @@ export const GLOBALTYPES = {
     PEER: 'PEER'
 }
 
-export const EditData = (data, id, post, video) => {
+export const EditData = (data, id, post, video, photo) => {
     const newData = data.map(item => 
-        (item._id === id ? post || video : item)
+        (item._id === id ? post || video || photo : item)
     )
     return newData;
 }

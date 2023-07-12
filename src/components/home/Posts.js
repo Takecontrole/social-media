@@ -27,7 +27,7 @@ const Posts = () => {
     }
 
     return (
-        <div className="posts">
+        <>
             {
                 homePosts.posts.map(post => (
                     <PostCard key={post._id} post={post} theme={theme} />
@@ -41,7 +41,7 @@ const Posts = () => {
             
             <LoadMoreBtn result={homePosts.result} page={homePosts.page}
             load={load} handleLoadMore={handleLoadMore} />
-        </div>
+        </>
     )
 }
 

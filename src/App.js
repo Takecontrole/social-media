@@ -13,11 +13,12 @@ import LayOut from './pages/LayOut'
 import Header from './components/header/Header'
 import StatusModal from './components/StatusModal'
 import VideoStatusModal from './components/VideoStatusModul'
-
+import PhotoStatusModal from './components/PhotoStatusModul'
 import { useSelector, useDispatch } from 'react-redux'
 import { refreshToken } from './redux/actions/authAction'
 import { getPosts } from './redux/actions/postAction'
 import { getVideos } from './redux/actions/videoAction'
+import { getPhotos } from './redux/actions/photoAction'
 import { getSuggestions } from './redux/actions/suggestionsAction'
 
 import io from 'socket.io-client'
@@ -34,7 +35,7 @@ import { themeSettings } from "./theme";
 import { useStateValue } from "./Context/StateProvider";
 import  { default as MusicPlayer }  from "./components/MusicPlayer";
 function App() {
-  const { auth, status, videostatus, modal, call } = useSelector(state => state)
+  const { auth, status, videostatus, photostatus, modal, call } = useSelector(state => state)
   const dispatch = useDispatch()
   const mode = useSelector((state) => state.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
@@ -58,6 +59,7 @@ function App() {
     if(auth.token) {
       dispatch(getPosts(auth.token))
       dispatch(getVideos(auth.token))
+      dispatch(getPhotos(auth.token))
       dispatch(getSuggestions(auth.token))
       dispatch(getNotifies(auth.token))
     }
@@ -68,7 +70,9 @@ function App() {
     if (!("Notification" in window)) {
       alert("Ваш браузер не поддерживает уведомления.");
     }
-    else if (Notification.permission === "granted") {}
+    else if (Notification.permission === "granted") {
+      
+    }
     else if (Notification.permission !== "denied") {
       Notification.requestPermission().then(function (permission) {
         if (permission === "granted") {}
@@ -91,20 +95,17 @@ function App() {
    <CssBaseline />
     <Router>
       <Alert />
-
       <input type="checkbox" id="theme" />
-      <div className={`App ${(status || videostatus || modal) && 'mode'}`}> 
+      <div className={`App ${(status || videostatus || photostatus || modal) && 'mode'}`}> 
       {auth.token && <LayOut />} 
         <Box sx={{ml: { xs: 0,  md:"22%", lg:"17%", xl:"14%" }}}>
           {status && <StatusModal />}
           {videostatus && <VideoStatusModal />}
+          {photostatus && <PhotoStatusModal />}
           {auth.token && <SocketClient />}
           {call && <CallModal />}
-          
           <Route exact path="/" component={auth.token ? Home : Login} />
           <Route exact path="/register" component={Register} />
-
-
           <PrivateRouter exact path="/:page" component={PageRender} />
           <PrivateRouter exact path="/:page/:id" component={PageRender} />
 

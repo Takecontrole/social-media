@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { POST_TYPES } from './redux/actions/postAction'
+import { PHOTO_TYPES } from './redux/actions/photoAction'
 import { GLOBALTYPES } from './redux/actions/globalTypes'
 import { NOTIFY_TYPES } from './redux/actions/notifyAction'
 import { MESS_TYPES } from './redux/actions/messageAction'
@@ -43,6 +44,22 @@ const SocketClient = () => {
     useEffect(() => {
         socket.on('unLikeToClient', newPost =>{
             dispatch({type: POST_TYPES.UPDATE_POST, payload: newPost})
+        })
+
+        return () => socket.off('unLikeToClient')
+    },[socket, dispatch])
+    // Likes photo
+    useEffect(() => {
+        socket.on('likeToClient', newPhoto =>{
+            dispatch({type: PHOTO_TYPES.UPDATE_PHOTO, payload: newPhoto})
+        })
+
+        return () => socket.off('likeToClient')
+    },[socket, dispatch])
+
+    useEffect(() => {
+        socket.on('unLikeToClient', newPhoto =>{
+            dispatch({type: PHOTO_TYPES.UPDATE_PHOTO, payload: newPhoto})
         })
 
         return () => socket.off('unLikeToClient')

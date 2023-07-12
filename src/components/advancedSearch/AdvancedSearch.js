@@ -38,7 +38,7 @@ const AdvancedSearch = () => {
 
      useEffect(() => {
       setFilteredProducts(
-        users.filter((item) =>
+        users?.filter((item) =>
           Object.entries(filters).every(([key, value]) =>
             item[key].includes(value)
           )
@@ -99,7 +99,7 @@ const AdvancedSearch = () => {
         <Tabs
           onChange={handleTabsChange}
           value={tabvalue}
-          indicatorColor="primary"
+          indicatorColor="transparent"
           textColor="black"
           variant="scrollable"
           scrollButtons="auto"
@@ -108,7 +108,7 @@ const AdvancedSearch = () => {
         >
             <Tab sx={{"&:focus": { outline: "none !important"}, "&.Mui-selected": {
           backgroundColor: `white ! important`,
-         borderRadius:"22px !important", boxShadow: '0 4px 12px 0 rgba(0,0,0,0.16)',margin:"5px"}, margin:"5px"}} label="Посты" />
+         borderRadius:"22px !important", boxShadow: '0 4px 12px 0 rgba(0,0,0,0.16)',margin:"5px"}, margin:"5px"}} label="Пользователии" />
           <Tab sx={{"&:focus": { outline: "none !important"}, "&.Mui-selected": {
           backgroundColor: `white ! important`,
          borderRadius:"22px !important", boxShadow: '0 4px 12px 0 rgba(0,0,0,0.16)',margin:"5px"},margin:"5px"}}  label="Посты"  />
@@ -206,6 +206,20 @@ const AdvancedSearch = () => {
     <MenuItem value={"moscow"}>Москва
       </MenuItem>
     <MenuItem value={"Vyazov 13"}>Нью Йорк ул. Вязов 13
+  </MenuItem>
+  
+ 
+  </Select>
+  </FormControl>
+                           <FormControl 
+                           sx={{marginTop:"1rem",backgroundColor:"white",
+                           width:"100%"}} >
+                           <InputLabel>Пол</InputLabel>
+   <Select name="gender" onChange={handleFilters} defaultValue={""} > 
+    <MenuItem value={""}>Все </MenuItem>
+    <MenuItem value={"male"}>Мужской
+      </MenuItem>
+    <MenuItem value={"Female"}>Женский
   </MenuItem>
   
  

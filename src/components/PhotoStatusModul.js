@@ -1,15 +1,15 @@
 import React, { useState, useRef, useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { GLOBALTYPES } from '../redux/actions/globalTypes'
-import { createVideo, updateVideo } from '../redux/actions/videoAction'
+import { createPhoto, updatePhoto } from '../redux/actions/photoAction'
 import Icons from './Icons'
 import {Box, Button, Divider, useTheme} from "@mui/material"
 import { imageShow, videoShow } from '../utils/mediaShow'
 import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
 import MusicNoteOutlinedIcon from '@mui/icons-material/MusicNoteOutlined';
 import PlayCircleOutlinedIcon from '@mui/icons-material/PlayCircleOutlined';
-const VideoStatusModal = () => {
-    const { auth, theme, videostatus, socket } = useSelector(state => state)
+const PhotoStatusModal = () => {
+    const { auth, theme, photostatus, socket } = useSelector(state => state)
     const dispatch = useDispatch()
 
     const [content, setContent] = useState('')
@@ -25,7 +25,7 @@ const VideoStatusModal = () => {
   useEffect(() => {
     let handler = (e)=>{
       if(!menuRef.current.contains(e.target)){
-        dispatch({ type: GLOBALTYPES.VIDEOSTATUS, payload: false})
+        dispatch({ type: GLOBALTYPES.PHOTOSTATUS, payload: false})
         console.log(menuRef.current);
       }      
     };
@@ -71,33 +71,28 @@ const VideoStatusModal = () => {
             type: GLOBALTYPES.ALERT, payload: {error: "Добавьте видео."}
         })
 
-        if(videostatus.onEdit){
-            dispatch(updateVideo({content, images, auth, videostatus}))
+        if(photostatus.onEdit){
+            dispatch(updatePhoto({content, images, auth, photostatus}))
         }else{
-            dispatch(createVideo({content, images, auth, socket}))
+            dispatch(createPhoto({content, images, auth, socket}))
             //.then(response => {window.location.reload(false)})
         }
-        
-
         setContent('')
         setImages([])
         if(tracks) tracks.stop()
-        dispatch({ type: GLOBALTYPES.VIDEOSTATUS, payload: false})
+        dispatch({ type: GLOBALTYPES.PHOTOSTATUS, payload: false})
     }
 
     useEffect(() => {
-        if(videostatus.onEdit){
-            setContent(videostatus.content)
-            setImages(videostatus.images)
+        if(photostatus.onEdit){
+            setContent(photostatus.content)
+            setImages(photostatus.images)
         } 
         
-    },[videostatus])
-
-    
-   
+    },[photostatus])
 
     return (
-        <div className="status_modal">
+        <div className="status_modal" style={{zIndex:10}}>
             <form ref={menuRef} onSubmit={handleSubmit}>
               
 
@@ -153,7 +148,7 @@ const VideoStatusModal = () => {
                                 <CameraAltOutlinedIcon
                       />
                       <input type="file" name="file" id="file"
-                                    multiple accept="image/*,video/*" onChange={handleChangeImages} />
+                                    multiple accept="image/*" onChange={handleChangeImages} />
                                 </div>
 
 
@@ -172,7 +167,7 @@ const VideoStatusModal = () => {
                 "&:hover": { color: palette.primary.main },
                                 "&:focus": { outline: "none !important"}
               }} type="submit" >
-                        Опубликовать видео
+                        Опубликовать фото
                     </Button>
                 </div>
                 </Box>
@@ -185,4 +180,4 @@ const VideoStatusModal = () => {
     )
 }
 
-export default VideoStatusModal
+export default PhotoStatusModal

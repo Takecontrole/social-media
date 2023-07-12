@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getAllSongs } from "../../api";
 import { actionType } from "../../Context/reducer";
+import { useSelector } from 'react-redux'
 import { useStateValue } from "../../Context/StateProvider";
 import Albums from "./Albums";
 import { motion } from "framer-motion";
@@ -15,7 +16,7 @@ const Music = () => {
     },
     dispatch,
   ] = useStateValue();
-
+  
   const [filteredSongs, setFilteredSongs] = useState(null);
 
   useEffect(() => {
@@ -51,7 +52,7 @@ const Music = () => {
 
 export const HomeSongContainer = ({ musics }) => { 
   const [{ isSongPlaying, song }, dispatch] = useStateValue();
-
+const { theme } = useSelector(state => state)
   const addSongToContext = (id) => {
     if (!isSongPlaying) {
       dispatch({
@@ -86,7 +87,7 @@ export const HomeSongContainer = ({ musics }) => {
               src={imageURL}
               alt=""
               
-              style={{width:"60px", height:"60px", borderRadius:"8px"}}
+              style={{filter: `${theme ? 'invert(1)' : 'invert(0)'}`,width:"60px", height:"60px", borderRadius:"8px"}}
             />
           </div>
           <div className=" p-2">

@@ -1,4 +1,5 @@
 import React, { useEffect, useState} from "react";
+import { useSelector } from 'react-redux'
 import { deleteSongById, getAllSongs } from "../api";
 import { actionType } from "../Context/reducer";
 import { useStateValue } from "../Context/StateProvider";
@@ -30,7 +31,7 @@ const Music = () => {
     },
     dispatch,
   ] = useStateValue();
-
+ const { theme } = useSelector(state => state)
   const [filteredSongs, setFilteredSongs] = useState(null);
   const [filterName, setFilterName] = useState(null);
   const [filterImg, setFilterImg] = useState(null);
@@ -184,14 +185,14 @@ const [index, setIndex] = useState(0); // setting 1st quote as default
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.6 }}
            className="status_modal">
-       <Box className="status_modal_bg" sx={{backgroundImage: Myarray[index].quote}}>
+       <Box className="status_modal_bg" sx={{backgroundImage: Myarray[index].quote, }}>
        <Box className="status_body">
        <Box className="status_head"  > 
        <button className="status_head_btn" onClick={() => setFilteredSongs(null)}><KeyboardBackspaceIcon/></button> 
                    {filterImg ? 
                              <img
                   src={filterImg}
-                  style={{width:"200px", height:"200px", objectFit:"cover", borderRadius:"15px", boxShadow: "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px"}}
+                  style={{width:"200px", height:"200px", objectFit:"cover", borderRadius:"15px", filter: `${theme ? 'invert(1)' : 'invert(0)'}`,boxShadow: "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px"}}
                   alt=""
                 /> 
                 : 

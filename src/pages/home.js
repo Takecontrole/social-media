@@ -3,6 +3,7 @@ import { Box, Tabs, Tab, AppBar, useMediaQuery, useTheme} from "@mui/material";
 import Status from '../components/home/Status'
 import VideoThumb from '../components/VideoThumb'
 import Posts from '../components/home/Posts'
+import Photos from '../components/home/Photos'
 import { useSelector } from 'react-redux'
 import LoadIcon from '../images/loading.gif'
 import RightSideBar from '../components/home/RightSideBar'
@@ -12,7 +13,7 @@ import RightSideBar from '../components/home/RightSideBar'
 let scroll = 0;
 
 const Home = () => {
-    const { homePosts, homeVideos } = useSelector(state => state) 
+    const { homePosts, homeVideos, homePhotos } = useSelector(state => state) 
     const theme = useTheme();
     const isNonMobileScreens = useMediaQuery("(min-width:801px)");
     const [tabvalue, setTabValue] = React.useState(0); 
@@ -98,6 +99,18 @@ const Home = () => {
                         <VideoThumb videos={homeVideos.videos} /> 
                 
             
+                 </div>} 
+               {tabvalue === 2 && <div className="posts">  
+                            {
+                    homePhotos.loading 
+                    ? <img src={LoadIcon}
+                    style={{width: "100px",
+    height:"100px"}} alt="loading" className="d-block mx-auto" />
+                    : (homePhotos.result === 0 && homePhotos.photos.length === 0)
+                        ? <h2 className="text-center">Нет фотографий</h2>
+                        : 
+                <Photos/>
+                }
                  </div>} 
             </Box>
             

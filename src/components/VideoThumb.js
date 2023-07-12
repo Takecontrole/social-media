@@ -12,19 +12,13 @@ const VideoThumb = ({videos, result}) => {
     return (
         <div >
             {
-                videos.map(video => (                    <div className="card border-0 my-3">                           <VideoCardHeader video={video} /> 
+                videos.map(video => (                    <div className="card border-0 my-3" style={{paddingBottom:0}}>                           
                            <div className="card_body-content" 
             style={{
                 filter: theme ? 'invert(1)' : 'invert(0)',
                 color: theme ? 'white' : '#111',
             }}>
-                <span>
-                    {
-                        video.content.length < 60 
-                        ? video.content 
-                        : readMore ? video.content + ' ' : video.content.slice(0, 60) + '.....'
-                    }
-                </span>
+                
                 {
                     video.content.length > 60 &&
                     <span className="readMore" onClick={() => setReadMore(!readMore)}>
@@ -35,15 +29,8 @@ const VideoThumb = ({videos, result}) => {
             </div>
                     <Link key={video._id} to={`/video/${video._id}`}> 
                         <div className="post_thumb_display">
-
-                            {
-                                video.images[0].url.match(/video/i)
-                                ?<video controls src={video.images[0].url} alt={video.images[0].url}
-                                style={{filter: theme ? 'invert(1)' : 'invert(0)'}} />
-
-                                :<img src={video.images[0].url} alt={video.images[0].url}
-                                style={{filter: theme ? 'invert(1)' : 'invert(0)'}} />
-                            }
+                     <video controls src={video.images[0].url} alt={video.images[0].url}
+                                style={{maxHeight:"700px",filter: theme ? 'invert(1)' : 'invert(0)'}} />
 
                             <div className="post_thumb_menu">
                                 <i className="far fa-heart">{video.likes.length}</i>
@@ -52,6 +39,7 @@ const VideoThumb = ({videos, result}) => {
                         </div>
 
                     </Link>
+                    <VideoCardHeader video={video} /> 
                         </div>
                 ))
             }

@@ -12,7 +12,10 @@ export const PROFILE_TYPES = {
     GET_ID: 'GET_PROFILE_ID',
     GET_POSTS: 'GET_PROFILE_POSTS',
     GET_VIDEOS: 'GET_PROFILE_VIDEOS',
-    UPDATE_POST: 'UPDATE_PROFILE_POST'
+    UPDATE_POST: 'UPDATE_PROFILE_POST',
+    UPDATE_VIDEO: 'UPDATE_PROFILE_VIDEO',
+    GET_PHOTOS: 'GET_PROFILE_PHOTOS',
+    UPDATE_PHOTOS: 'UPDATE_PROFILE_PHOTO'
 }
 
 
@@ -24,10 +27,12 @@ export const getProfileUsers = ({id, auth}) => async (dispatch) => {
         const res = getDataAPI(`/user/${id}`, auth.token)
         const res1 = getDataAPI(`/user_posts/${id}`, auth.token)
         const res2 = getDataAPI(`/user_videos/${id}`, auth.token)
+        const res3 = getDataAPI(`/user_photos/${id}`, auth.token)
         
         const users = await res;
         const posts = await res1;
         const videos = await res2;
+        const photos = await res3;
 
         dispatch({
             type: PROFILE_TYPES.GET_USER,
@@ -41,6 +46,10 @@ export const getProfileUsers = ({id, auth}) => async (dispatch) => {
         dispatch({
             type: PROFILE_TYPES.GET_VIDEOS,
             payload: {...videos.data, _id: id, page: 2}
+        })
+        dispatch({
+            type: PROFILE_TYPES.GET_PHOTOS,
+            payload: {...photos.data, _id: id, page: 2}
         })
 
         dispatch({type: PROFILE_TYPES.LOADING, payload: false})

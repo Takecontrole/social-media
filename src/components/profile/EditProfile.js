@@ -84,7 +84,7 @@ const EditProfile = ({setOnEdit}) => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="fullname">Full Name</label>
+                    <label htmlFor="fullname">Имя</label>
                     <div className="position-relative">
                         <input type="text" className="form-control" id="fullname"
                         name="fullname" value={fullname} onChange={handleInput} />
@@ -96,25 +96,25 @@ const EditProfile = ({setOnEdit}) => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="mobile">Mobile</label>
+                    <label htmlFor="mobile">Телефон</label>
                     <input type="text" name="mobile" value={mobile}
                     className="form-control" onChange={handleInput} />
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="address">Address</label>
+                    <label htmlFor="address">Город</label>
                     <input type="text" name="address" value={address}
                     className="form-control" onChange={handleInput} />
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="website">Website</label>
+                    <label htmlFor="website">Вебсайт</label>
                     <input type="text" name="website" value={website}
                     className="form-control" onChange={handleInput} />
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="story">Story</label>
+                    <label htmlFor="story">Стори</label>
                     <textarea name="story" value={story} cols="30" rows="4"
                     className="form-control" onChange={handleInput} />
 
@@ -123,7 +123,7 @@ const EditProfile = ({setOnEdit}) => {
                     </small>
                 </div>
 
-                <label htmlFor="gender">Gender</label>
+                <label htmlFor="gender">Пол</label>
                 <div className="input-group-prepend px-0 mb-4">
                     <select name="gender" id="gender" value={gender}
                     className="custom-select text-capitalize"
@@ -134,7 +134,7 @@ const EditProfile = ({setOnEdit}) => {
                     </select>
                 </div>
 
-                <button className="btn btn-info w-100" type="submit">Save</button>
+                <button className="btn btn-info w-100" type="submit">Сохранить</button>
             </form>
         </div>
     )

@@ -27,6 +27,15 @@
     overflow-x: hidden;
     overflow-y: scroll;
 }
+.status_modal_photo_bg{
+    max-width: 550px;
+    width: 100% ;
+    margin: 30px auto ;
+    padding: 10px ;
+    border-radius: 22px;
+}
+
+
 .status_modal_add_song{
     max-width: 550px;
     background: white;

@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { likeVideo, unLikeVideo, saveVideo , unSaveVideo} from '../../../redux/actions/videoAction'
 import ShareModal from '../../ShareModal'
 import { BASE_URL } from '../../../utils/config'
-
+import ReplySharpIcon from '@mui/icons-material/ReplySharp';
 
 const VideoCardFooter = ({video}) => {
     const [isLike, setIsLike] = useState(false)
@@ -74,7 +74,8 @@ const VideoCardFooter = ({video}) => {
     return (
         <div className="card_footer">
             <div className="card_icon_menu">
-                <div>
+                <div> 
+                <ReplySharpIcon onClick={() => setIsShare(!isShare)} sx={{marginBottom:"15px",width:"40px", height:"40px"}}/>
                     <LikeButton 
                     isLike={isLike}
                     handleLike={handleLike}
@@ -84,7 +85,6 @@ const VideoCardFooter = ({video}) => {
                         <i className="far fa-comment" />
                     </Link>
 
-                    <img src={Send} alt="Send" onClick={() => setIsShare(!isShare)} />
                 </div>
 
                 {

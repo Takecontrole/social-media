@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useSelector } from 'react-redux'
 import { IoChevronDown } from "react-icons/io5";
 import AddIcon from '@mui/icons-material/Add';
 import Dashboard from "./Dashboard";
@@ -9,8 +10,10 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css';
 import { FreeMode } from "swiper";
 import { Box, Button, useTheme } from "@mui/material"
+import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 const FilterButtons = ({ filterData, setFilterName, setFilterImg, changeQuote , flag }) => {
   const { palette } = useTheme(); 
+  const { theme } = useSelector(state => state)
   const [filterMenu, setFilterMenu] = useState(true);
   const [{ artistFilter, albumFilter, filterTerm }, dispatch] = useStateValue();
   const [openModul, setOpenModul] = useState(false);
@@ -71,7 +74,7 @@ let ventana = "";
         {(flag === "Albums" || flag === "Artist") &&
         <Box>
                       {flag === "Albums"&& (
-         <h4>Ваши альбомы</h4>
+         <h4>Мои альбомы</h4>
               )}
                       {flag === "Artist"&& (
          <h4>Возможно вам понравиться</h4>
@@ -97,7 +100,7 @@ breakpoints={{
       spaceBetween: 30
     },
     1100: {
-      slidesPerView: 7,
+      slidesPerView: 6.5,
       spaceBetween: 20
     }
       }}
@@ -123,15 +126,16 @@ onClick={changeQuote}
               {flag === "Albums"&& (
                 <img
                   src={data.imageURL}
-                  style={{ borderRadius:"8px"}}
+                  style={{ borderRadius:"8px", filter: `${theme ? 'invert(1)' : 'invert(0)'}`}}
                   className="albumImagesList"
                   alt=""
+                  
                 />
               )}
               {flag === "Artist" && (
                 <img
                   src={data.imageURL}
-                  style={{width:"150px", height:"150px", borderRadius:"50%"}}
+                  style={{width:"150px", height:"150px", borderRadius:"50%", filter: `${theme ? 'invert(1)' : 'invert(0)'}`}}
                   alt=""
                 />
               )}
@@ -239,11 +243,12 @@ onClick={changeQuote}
               {flag === "Exclusive"&& (
                 <img
                   src={data.imageURL}
-                  style={{width:"250px", height:"300px", borderRadius:"8px",}}
+                  style={{width:"250px", height:"300px", filter: `${theme ? 'invert(1)' : 'invert(0)'}`, borderRadius:"8px",}}
                   
                   alt=""
                 />
               )}
+              <PlayCircleIcon sx={{position:"absolute", width:"30px", height:"30px", color:"white",bottom:"0.5rem", right:"1.5rem"}}/>
             </Box>
           </Box>
           </SwiperSlide>
@@ -266,11 +271,12 @@ onClick={changeQuote}
               {flag === "Exclusive"&& (
                 <img
                   src={data.imageURL}
-                  style={{width:"350px", height:"300px", borderRadius:"8px"}}
+                  style={{width:"350px", height:"300px", filter: `${theme ? 'invert(1)' : 'invert(0)'}`, borderRadius:"8px"}}
                   
                   alt=""
                 />
               )}
+                <PlayCircleIcon sx={{position:"absolute", width:"30px", height:"30px", color:"white",top:"0.5rem", left:"1rem"}}/>
             </Box>
           </Box>
           </SwiperSlide>

@@ -14,7 +14,7 @@ const RightSideBar = () => {
                 <Box sx={{mt:"1rem",py:"1rem", px:"0.5rem",backgroundColor:"white", borderRadius:"22px"}} >
 
             <div className="d-flex justify-content-between align-items-center my-2">
-                <Typography variant="error">Рекомендуемые подписки</Typography>
+                <Typography variant="error"> Рекомендации</Typography>
                 {
                     !suggestions.loading &&
                     <i className="fas fa-redo" style={{cursor: 'pointer'}}

@@ -11,6 +11,7 @@ import { motion } from "framer-motion";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import {useMediaQuery} from "@mui/material"
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -93,7 +94,9 @@ export const HomeSongContainer = ({ musics }) => {
     {isNonMobileScreens ? 
     <div>
     <Link to="/allmusic"> 
-    <p>показать все</p> 
+    <p style={{fontSize:"14px"}}>
+                 показать все <ArrowForwardIosIcon sx={{fontWeight:"bold",width:"10px", height:"10px"}}/>
+                </p>
     </Link>
  <Grid container direction="column" spacing={0} style={{height:"210px",maxHeight:"210px", marginBottom:"2rem"}}>
         { musics &&

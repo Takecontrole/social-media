@@ -6,7 +6,8 @@ const initialState = {
     ids: [],
     users: [],
     posts: [],
-    videos: []
+    videos: [],
+    photos: []
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -58,6 +59,16 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 videos: EditData(state.videos, action.payload._id, action.payload)
+            };
+             case PROFILE_TYPES.GET_PHOTOS:
+            return {
+                ...state,
+                photos: [...state.photos, action.payload]
+            };
+        case PROFILE_TYPES.UPDATE_PHOTO:
+            return {
+                ...state,
+                photos: EditData(state.photos, action.payload._id, action.payload)
             };
         default:
             return state;

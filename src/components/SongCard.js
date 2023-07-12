@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from 'react-redux'
 import {Box} from "@mui/material"
 import { getAllSongs } from "../api";
 import { actionType } from "../Context/reducer";
@@ -7,7 +8,7 @@ import { motion } from "framer-motion";
 
  const SongCard = ({ data, id, textOfSongColor }) => {
   const [{ allSongs, song, isSongPlaying }, dispatch] = useStateValue();
-
+  const { theme } = useSelector(state => state)
 const addSongToContext = (id) => {
     if (!isSongPlaying) {
       dispatch({
@@ -39,7 +40,7 @@ const addSongToContext = (id) => {
               src={data.imageURL}
               alt=""
               
-              style={{width:"60px", height:"60px", borderRadius:"8px"}}
+              style={{width:"60px", height:"60px", borderRadius:"8px", filter: `${theme ? 'invert(1)' : 'invert(0)'}`}}
             />
           </div>
           <Box textAlign="start" color={textOfSongColor}>

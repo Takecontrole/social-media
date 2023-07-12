@@ -27,6 +27,7 @@
     margin-bottom: 1rem;
     height: 100%; 
     padding-bottom: 50px;
+    
 }
 /* --------- Post Card Header --------- */
 .posts .card_header{
@@ -35,6 +36,7 @@
     align-items: center;
     cursor: pointer;
     padding: 15px 25px;
+    
 }
 .posts .card_header .card_name{
     transform: translateY(3px);

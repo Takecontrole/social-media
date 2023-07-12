@@ -54,11 +54,11 @@ const items = [
 ];
 
 const Info = ({id, auth, profile, dispatch}) => { 
-  const { online } = useSelector(state => state)
+  const { online, theme } = useSelector(state => state)
     const [userData, setUserData] = useState([])
     const [onEdit, setOnEdit] = useState(false) 
     const { palette } = useTheme();
-    const theme = useTheme(); 
+    const th = useTheme(); 
     const isNonMobile = useMediaQuery("(min-width: 801px)");
 
     const [showFollowers, setShowFollowers] = useState(false)
@@ -102,7 +102,7 @@ const Info = ({id, auth, profile, dispatch}) => {
                 userData.map(user => (
                 <Box>
                  <Box sx={{height:{xs:"200px",md:"200px"}, backgroundColor:"white"}}>
-        <img src={user.bg} style={{height:"110%", width:"100%", objectFit:"cover",}} />
+        <img src={user.bg} style={{height:"110%", width:"100%", objectFit:"cover", filter: `${theme ? 'invert(1)' : 'invert(0)'}`}} />
         </Box>
                     <Box sx={{position:"relative",width: "100%",
     display: "flex", alignItems:{xs:"center",md:"start"}, justifyContent:{xs:"center",md:"start"},
@@ -236,14 +236,14 @@ const Info = ({id, auth, profile, dispatch}) => {
                       <ListItemIcon 
                         sx={{
                           ml: {xs:-2, md:"2rem"},  justifyContent:"center",
-                          color: theme.palette.neutral.main }}
+                          color: th.palette.neutral.main }}
                       >
                         {icon}
                       </ListItemIcon>
                       <ListItemText 
                       sx={{
                           ml:0,
-                          color: theme.palette.neutral.main }}
+                          color: th.palette.neutral.main }}
                       primary={text} />
   </ListItemButton>
  </ListItem>

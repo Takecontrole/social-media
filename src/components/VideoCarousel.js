@@ -16,16 +16,10 @@ const VideoCarousel = ({images, id}) => {
 
                       {
                     images.map((img, index) => (
-                        <div>
-                            {
-                                img.url.match(/video/i)
-                                ? <video  src={img.url}  alt={img.url}
-                                style={{filter: theme ? 'invert(1)' : 'invert(0)', minHeight:"220px",
+                        <div> 
+                        <video  src={img.url}  alt={img.url}
+                                style={{filter: theme ? 'invert(1)' : 'invert(0)', minHeight:"220px",maxHeight:"700px",
                       width: "100%", objectFit:"cover"}} />
-
-                                : <img src={img.url} className="w-100" alt={img.url}
-                                style={{filter: theme ? 'invert(1)' : 'invert(0)'}} />
-                            }
               </div>
                     ))
                 }
