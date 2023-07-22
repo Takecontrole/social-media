@@ -24,7 +24,7 @@ import { IconButton, InputAdornment } from '@mui/material'
 
 
 const Login = () => {
-  const initialState = { email: '', password: '' }
+  const initialState = { email: 'takecontrole2034@gmail.com', password: '123456' }
     const [userData, setUserData] = useState(initialState)
     const { email, password } = userData
      const isNonMobile = useMediaQuery("(min-width:600px)"); 
