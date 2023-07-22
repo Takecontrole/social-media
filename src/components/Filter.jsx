@@ -94,8 +94,8 @@ export const HomeSongContainer = ({ musics }) => {
     {isNonMobileScreens ? 
     <div>
     <Link to="/allmusic"> 
-    <p style={{fontSize:"14px"}}>
-                 показать все <ArrowForwardIosIcon sx={{fontWeight:"bold",width:"10px", height:"10px"}}/>
+    <p style={{marginLeft:"0.5rem", fontSize:"14px"}}>
+                 моя музыка  <ArrowForwardIosIcon sx={{fontWeight:"bold",width:"10px", height:"10px"}}/>
                 </p>
     </Link>
  <Grid container direction="column" spacing={0} style={{height:"210px",maxHeight:"210px", marginBottom:"2rem"}}>

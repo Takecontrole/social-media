@@ -80,9 +80,21 @@ const Login = () => {
       >
         <Typography fontWeight="500" variant="h5" sx={{ mb: "1.5rem" }}>
           Добро пожаловать!
-        </Typography>
+        </Typography> 
 
-        <form onSubmit={handleSubmit}>
+
+        <form onSubmit={handleSubmit}> 
+                 <Typography fontWeight="500" variant="h6" sx={{ mb: "1.5rem" }}>
+          Чтобы открыть тестовый аккаунт просто жми <Button type="submit"
+              sx={{ fontSize:"5px",
+               width:"10px", height:"10px",
+                backgroundColor: palette.primary.main,
+                color: palette.background.alt
+              }}
+            >
+                    В IT
+                </Button> Или зарегистрируй новый.
+        </Typography>
           <Box
             display="grid"
             gap="30px"
@@ -142,11 +154,8 @@ const Login = () => {
                 "&:hover": { color: palette.primary.main },
               }}
             >
-              
-           
                     В IT
                 </Button>
-       
               </Box>
             </Box>
         </form> 

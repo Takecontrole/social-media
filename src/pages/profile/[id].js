@@ -219,7 +219,7 @@ else {
                     
 
                     <Link 
-                 style={{position:"absolute", width:"100%", bottom:0, display:"flex", alignItems:"center", justifyContent:"center", textAlign:"center", padding: "0.75rem 1.5rem 1.25rem 0rem", color:palette.primary.main, textDecoration:"none"}} to={`/usersphotos/${auth.user._id}`}>
+                 style={{position:"absolute", width:"100%", bottom:0, display:"flex", alignItems:"center", justifyContent:"center", textAlign:"center", padding: "0.75rem 1.5rem 1.25rem 0rem", color:palette.primary.main, textDecoration:"none"}} to="/music">
                  <Typography sx={{fontSize:{xs:"14px",md:"16px"}}}>
                  перейти в раздел <ArrowForwardIosIcon sx={{fontWeight:"bold",width:"10px", height:"10px"}}/>
                 </Typography>
