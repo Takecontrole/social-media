@@ -137,7 +137,20 @@ else {
                     <Box
           flexBasis={isNonMobileScreens ? "65%" : undefined}
           mt={isNonMobileScreens ? undefined : "2rem"}
-        > 
+        >                   {!isNonMobileScreens && (
+          <Box sx={{mb:"1.5rem", py:"1rem", px:"0.5rem",backgroundColor:"white", borderRadius:"22px"}} >
+                            
+                            <Followers 
+                            auth={auth} profile={profile} dispatch={dispatch} id={id} 
+                            />
+                            <Box my="0.5rem">
+                        <Divider />
+                        </Box>
+                            <Following 
+                            auth={auth} profile={profile} dispatch={dispatch} id={id} 
+                            />
+                  </Box>
+            )}   
                     <Box position="relative" 
         height={ventana}
         backgroundColor="white"

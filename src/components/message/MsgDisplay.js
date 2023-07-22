@@ -12,7 +12,7 @@ const MsgDisplay = ({user, msg, theme, data}) => {
     const handleDeleteMessages = () => {
         if(!data) return;
         
-        if(window.confirm('Do you want to delete?')){
+        if(window.confirm('Хотите удалить?')){
             dispatch(deleteMessages({msg, data, auth}))
         }
     }
@@ -59,18 +59,18 @@ const MsgDisplay = ({user, msg, theme, data}) => {
 
                         <span className="material-icons font-weight-bold mr-1"
                         style={{ 
-                            fontSize: '2.5rem', color: msg.call.times === 0 ? 'crimson' : 'green',
+                            fontSize: '0.5rem', color: msg.call.times === 0 ? 'crimson' : 'green',
                             filter: theme ? 'invert(1)' : 'invert(0)'
                         }}>
                             {
                                 msg.call.times === 0
-                                ? msg.call.video ? 'videocam_off' : 'phone_disabled'
-                                : msg.call.video ? 'video_camera_front' : 'call'
+                                ? msg.call.video ? 'отклонён' : 'недоступен'
+                                : msg.call.video ? 'фронтальная камера' : 'звонок'
                             }
                         </span>
 
                         <div className="text-left">
-                            <h6>{msg.call.video ? 'Video Call' : 'Audio Call'}</h6>
+                            <h6>{msg.call.video ? 'Видео звонок' : 'Аудио звонок'}</h6>
                             <small>
                                 {
                                     msg.call.times > 0 

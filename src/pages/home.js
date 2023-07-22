@@ -50,7 +50,7 @@ const Home = () => {
         > 
 
                                       <Status />
-                                      
+               {!isNonMobileScreens && (                  <RightSideBar />          )}    
                                   {!isNonMobileScreens && (
                                                       <Box position="relative"
                      marginTop="1rem"     height="60px"

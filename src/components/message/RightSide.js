@@ -203,7 +203,7 @@ const RightSide = () => {
             style={{height: media.length > 0 ? 'calc(100% - 180px)' : ''}} >
                 <div className="chat_display" ref={refDisplay}>
                     <button style={{marginTop: '-25px', opacity: 0}} ref={pageEnd}>
-                        Load more
+                        Расскрыть
                     </button>
 
                     {
@@ -253,7 +253,7 @@ const RightSide = () => {
             </div>
 
             <form className="chat_input" onSubmit={handleSubmit} >
-                <input type="text" placeholder="Enter you message..."
+                <input type="text" placeholder="Введите ваше сообщение..."
                 value={text} onChange={e => setText(e.target.value)}
                 style={{
                     filter: theme ? 'invert(1)' : 'invert(0)',
