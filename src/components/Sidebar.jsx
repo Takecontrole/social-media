@@ -30,6 +30,7 @@ import {
   TrendingUpOutlined,
   PieChartOutlined,
 } from "@mui/icons-material";
+import PhotoLibrarySharpIcon from '@mui/icons-material/PhotoLibrarySharp';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MailIcon from '@mui/icons-material/Mail';
 import { useEffect, useState } from "react";
@@ -84,6 +85,11 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen, drawerWidth}) => {
     path: '/music',
     icon: <LibraryMusicOutlinedIcon />,
   },
+  {
+    text: "Фотографии",
+    path: `/usersphotos/${auth.user._id}`,
+    icon: <PhotoLibrarySharpIcon />,
+  },
 
 ];
 
@@ -109,7 +115,7 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen, drawerWidth}) => {
               <FlexBetween  color={theme.palette.primary.main}>
                 <Box display="column" alignItems="center" gap="0.5rem">
 
-                  <AvatarDropdown/>
+                  <AvatarDropdown setIsSidebarOpen={setIsSidebarOpen}/>
                 </Box>
                 {!isNonMobile && (
                   <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>

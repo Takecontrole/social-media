@@ -20,7 +20,7 @@ import Avatarka from './Avatar'
 import NotifyModal from './NotifyModal'
 import Menu from './header/Menu'
 import { GLOBALTYPES } from '../redux/actions/globalTypes'
-const AvatarDropdown = () => { 
+const AvatarDropdown = ({setIsSidebarOpen}) => { 
   const { auth, theme, notify } = useSelector(state => state)
     const dispatch = useDispatch()
   const [avatarEl, setAvatarEl] = React.useState(
@@ -108,7 +108,7 @@ const isNonMobile = useMediaQuery("(min-width: 801px)");
           <ListItem disablePadding>
           <Link style={{color:"black"}} to={`/profile/${auth.user._id}`}>
             <ListItemButton >
-              <ListItemText primary="Профиль" />
+              <ListItemText onClick={() => setIsSidebarOpen(false)} primary="Профиль" />
             </ListItemButton>
             </Link>
           </ListItem>
