@@ -14,7 +14,7 @@ const AlertSuccess = ({ msg,handleShow,bgColor }) => {
     >
       <div style={{width:"400px",height:"100px",backgroundImage:bgColor, padding:"0.7rem", borderRadius:"10px"}}>
         <BsEmojiSmile />
-        <p style={{fontSize:"18px", fontWeight:"bold"}}>
+        <p style={{fontSize:"12px", fontWeight:"bold"}}>
           {msg?.length > 50 ? `${msg?.slice(0, 50)}...` : msg}
         </p>
         <button

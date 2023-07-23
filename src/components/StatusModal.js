@@ -98,11 +98,12 @@ const StatusModal = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        /*
         if(images.length === 0)
         return dispatch({ 
             type: GLOBALTYPES.ALERT, payload: {error: "Добавьте фото."}
         })
-
+        */
         if(status.onEdit){
             dispatch(updatePost({content, images, auth, status}))
         }else{

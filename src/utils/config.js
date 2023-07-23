@@ -1,1 +1,1 @@
-export const BASE_URL = 'https://social-media-api.adaptable.app'
+export const BASE_URL = 'https://social-media-takecontrole.vercel.app'
